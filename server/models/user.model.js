@@ -32,8 +32,17 @@ const User = mongoose.model('User', {
                 throw new Error('Invalid email address!');
             }
         }
+    },
+    password: {
+        type: String,
+        required: true,
+        trim: true,
+        validate(value) {
+            if (!isStrongPassword(value)) {
+                throw new Error('Weak password!');
+            }
+        }
     }
-    //TODO PASSWORD!!!!
 });
 
 module.exports = User;
