@@ -37,11 +37,11 @@ const User = mongoose.model('User', {
         type: String,
         required: true,
         trim: true,
-        validate(value) {
-            if (!isStrongPassword(value)) {
-                throw new Error('Weak password!');
-            }
-        }
+        // validate(value) {
+        //     if (!validator.isStrongPassword(value)) {
+        //         throw new Error('Weak password!');
+        //     }
+        // }
     }
 });
 

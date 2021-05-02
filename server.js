@@ -3,7 +3,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
+require('./server/db/mongoose.db');
 const airBnbRoutes = require('./server/routes/air_bnb.routes');
+
+
 
 const app = express();
 const port = process.env.PORT || 8000;
