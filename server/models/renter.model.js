@@ -19,6 +19,7 @@ const Renter = mongoose.model('Renter', {
     phoneNumber: {
         type: String,
         required: true,
+        trim: true
         // validate(value) {
         //     if (!validator.isMobilePhone(value, 'any', { strictMode: true })) {
         //         throw new Error('Invalid phone number!');

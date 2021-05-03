@@ -1,5 +1,6 @@
 const User = require('../models/user.model');
 const Renter = require('../models/renter.model');
+const Host = require('../models/host.model');
 
 const getUsers = async (req, res) => {
     try {
@@ -55,7 +56,8 @@ const updateUserByEmail = async (req, res) => {
         }
         else if (updates.includes('email')) {
             let newEmail = req.body.email;
-            const renterRes = await Renter.findOneAndUpdate({ email: newEmail }, { email: newEmail }, { new: true, runValidators: true });
+            const renterRes = await Renter.findOneAndUpdate({ email }, { email: newEmail }, { new: true, runValidators: true });
+            const hostRes = await Host.findOneAndUpdate({ email }, { email: newEmail }, { new: true, runValidators: true });
         }
 
         res.status(200).send(result);
@@ -72,6 +74,10 @@ const deleteUserByEmail = async (req, res) => {
 
         if (!result) {
             res.status(404).send('No such email!');
+        }
+        else {
+            const renterRes = await Renter.findOneAndDelete({ email });
+            const hostRes = await Host.findOneAndDelete({ email });
         }
 
         res.status(202).send(result);
