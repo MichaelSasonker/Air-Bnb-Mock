@@ -29,7 +29,6 @@ const addUser = async (req, res) => {
     
     try {
         await user.save();
-        console.log(user)
 
         return res.status(201).send(user);
     } catch (err) {
@@ -38,9 +37,48 @@ const addUser = async (req, res) => {
     }
 }
 
+const updateUserByEmail = async (req, res) => {
+    const email = req.params.email;
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ['firstName', 'lastName', 'email', 'password'];
+    const isValidOperation = updates.every(update => allowedUpdates.includes(update));
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid updates!' });
+    }
+
+    try {
+        const result = await User.findOneAndUpdate(email, req.body, { new: true, runValidators: true });
+
+        if (!result) {
+            return res.status(404).send('No such email!');
+        }
+
+        res.status(200).send(result);
+    } catch (err) {
+
+        res.status(400).send(err);
+    }
+}
+
+const deleteUserByEmail = async (req, res) => {
+    const email = req.params.email;
+    try {
+        const result = await User.findOneAndDelete({ email });
+
+        if (!result) {
+            res.status(404).send('No such email!');
+        }
+
+        res.status(202).send(result);
+    } catch (err) {
+        res.status(400).send();
+    }
+}
 
 module.exports = {
     getUsers,
     getUserByEmail,
-    addUser
+    addUser,
+    updateUserByEmail,
+    deleteUserByEmail
 }
