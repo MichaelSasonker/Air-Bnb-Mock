@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/user.controller');
 const renterController = require('../controllers/renter.controller');
 const hostController = require('../controllers/host.controller');
+const actionController = require('../controllers/action.controller');
 
 // const bankAccountController = require('../controllers/bank_account.controller');
 
@@ -27,5 +28,13 @@ router.get('/hosts/getHosts', (req, res) => hostController.getHosts(req, res))
 .post('/hosts/addHost', (req, res) => hostController.addHost(req, res))
 .patch('/hosts/updateHostByEmail/:email', (req, res) => hostController.updateHostByEmail(req, res))
 .delete('/hosts/deleteHostByEmail/:email', (req, res) => hostController.deleteHostByEmail(req, res));
+
+/* Action Routes: */
+router.get('/actions/getActions', (req, res) => actionController.getActions(req, res))
+.get('/actions/getActionByHostEmail/:hostEmail', (req, res) => actionController.getActionByHostEmail(req, res))
+.get('/actions/getActionByRenterEmail/:renterEmail', (req, res) => actionController.getActionByRenterEmail(req, res))
+.post('/actions/addAction', (req, res) => actionController.addAction(req, res))
+.delete('/actions/deleteActionByHostEmail/:hostEmail', (req, res) => actionController.deleteActionByHostEmail(req, res))
+.delete('/actions/deleteActionByRenterEmail/:renterEmail', (req, res) => actionController.deleteActionByRenterEmail(req, res));
 
 module.exports = router;

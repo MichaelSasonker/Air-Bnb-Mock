@@ -6,7 +6,6 @@ const Action = mongoose.model('Action', {
     hostEmail: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
         validate(value) {
             if (!validator.isEmail(value)) {
@@ -17,7 +16,6 @@ const Action = mongoose.model('Action', {
     renterEmail: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
         validate(value) {
             if (!validator.isEmail(value)) {
@@ -45,7 +43,7 @@ const Action = mongoose.model('Action', {
             }
         }
     },
-    guestNumber: {
+    guestsNumber: {
         type: Number,
         required: true,
         trim: true,
