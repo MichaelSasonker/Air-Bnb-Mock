@@ -30,7 +30,10 @@ const Renter = mongoose.model('Renter', {
         required: true,
         trim: true,
         validate(value) {
-            if(!validator.isCreditCard(value)) {
+            // if(!validator.isCreditCard(value)) {
+            //     throw new Error('Invalid credit card number!');
+            // }
+            if (value.length != 16) {
                 throw new Error('Invalid credit card number!');
             }
         }

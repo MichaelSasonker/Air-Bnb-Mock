@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const Renter = require('../models/renter.model');
 
 const getUsers = async (req, res) => {
     try {
@@ -46,11 +47,15 @@ const updateUserByEmail = async (req, res) => {
         return res.status(400).send({ error: 'Invalid updates!' });
     }
 
-    try {
-        const result = await User.findOneAndUpdate(email, req.body, { new: true, runValidators: true });
 
+    try {
+        const result = await User.findOneAndUpdate({ email }, req.body, { new: true, runValidators: true });
         if (!result) {
             return res.status(404).send('No such email!');
+        }
+        else if (updates.includes('email')) {
+            let newEmail = req.body.email;
+            const renterRes = await Renter.findOneAndUpdate({ email: newEmail }, { email: newEmail }, { new: true, runValidators: true });
         }
 
         res.status(200).send(result);
