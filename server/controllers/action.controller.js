@@ -48,14 +48,16 @@ const addAction = async (req, res) => {
     //only renter can add action! (in React)
     // const isValidHost = await isValidUserEmail(newAction.hostEmail);
     const action = new Action(newAction);
-    const host = Host.findOne({ email: req.body.hostEmail });
+    const host = await Host.findOne({ email: req.body.hostEmail });
+    // console.log(host)
     //check how to make it unavailable when the dates are not available
     try {
         if (isValidRenter) {
-            if (!isValidDatesRange(req.body.fromDate, req.body.toDate, req.body.hostEmail)) {
+            let isValidDatesRes = await isValidDatesRange(req.body.fromDate, req.body.toDate, req.body.hostEmail)
+            if (!isValidDatesRes) {
                 return res.status(404).send('These dates are NOT available!');
             }
-            else if (host.maxGuests < req.body.guestsNumber) {
+            else if (host.apartmentDetails.maxGuests < req.body.guestsNumber) {
                 return res.status(404).send('Guests number is too high!');
             }
             else {
@@ -75,7 +77,7 @@ const addAction = async (req, res) => {
 const deleteActionByRenterEmail = async (req, res) => {
     const renterEmail = req.params.renterEmail;
     try {
-        const result = await Renter.findOneAndDelete({ renterEmail });
+        const result = await Action.findOneAndDelete({ renterEmail });
 
         if (!result) {
             res.status(404).send('No such renter email!');
@@ -90,7 +92,7 @@ const deleteActionByRenterEmail = async (req, res) => {
 const deleteActionByHostEmail = async (req, res) => {
     const hostEmail = req.params.hostEmail;
     try {
-        const result = await Host.findOneAndDelete({ hostEmail });
+        const result = await Action.findOneAndDelete({ hostEmail });
 
         if (!result) {
             res.status(404).send('No such host email!');
