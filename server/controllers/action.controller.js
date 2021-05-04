@@ -49,7 +49,6 @@ const addAction = async (req, res) => {
     // const isValidHost = await isValidUserEmail(newAction.hostEmail);
     const action = new Action(newAction);
     const host = Host.findOne({ email: req.body.hostEmail });
-
     //check how to make it unavailable when the dates are not available
     try {
         if (isValidRenter) {
