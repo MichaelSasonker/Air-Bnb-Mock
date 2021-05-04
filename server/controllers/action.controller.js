@@ -1,4 +1,3 @@
-const Renter = require('../models/renter.model');
 const Host = require('../models/host.model');
 const Action = require('../models/action.model');
 const isValidUserEmail = require('../utils/isValidEmail');
@@ -44,13 +43,12 @@ const getActionByRenterEmail = async (req, res) => {
 const addAction = async (req, res) => {
     const newAction = req.body;
     const isValidRenter = await isValidUserEmail(newAction.renterEmail);
-
-    //only renter can add action! (in React)
     // const isValidHost = await isValidUserEmail(newAction.hostEmail);
+    //only renter can add action! (in React)
+
     const action = new Action(newAction);
     const host = await Host.findOne({ email: req.body.hostEmail });
-    // console.log(host)
-    //check how to make it unavailable when the dates are not available
+
     try {
         if (isValidRenter) {
             let isValidDatesRes = await isValidDatesRange(req.body.fromDate, req.body.toDate, req.body.hostEmail)

@@ -11,6 +11,10 @@ const getUsers = async (req, res) => {
     }
 }
 
+const getUserDetails = async (req, res) => {
+    return res.send(req.user);
+}
+
 const getUserByEmail = async (req, res) => {
     const email = req.params.email;
     try {
@@ -31,11 +35,44 @@ const addUser = async (req, res) => {
     
     try {
         await user.save();
+        const token = await user.generateAuthToken();
 
-        return res.status(201).send(user);
+        return res.status(201).send({ user, token });
     } catch (err) {
 
         return res.status(400).send(err);
+    }
+}
+
+const loginUser = async (req, res) => {
+    try {
+        const result = await User.findByCredentials(req.body.email, req.body.password);
+        const token = await result.generateAuthToken();
+        
+        return res.send({ result, token });
+    } catch (err) {
+        return res.status(400).send(err);
+    }
+}
+
+const logoutUser = async (req, res) => {
+    try {
+        req.user.tokens = req.user.tokens.filter(token => token.token !== req.token);
+        await req.user.save();
+
+        return res.status(200).send('User has logout!');
+    } catch (err) {
+        return res.status(500).send();
+    }
+}
+
+const logoutAllUsers = async (req, res) => {
+    try {
+        req.user.tokens = [];
+        await req.user.save();
+        return res.status(200).send('User has logout from all devices!');
+    } catch (err) {
+        return res.status(500).send();
     }
 }
 
@@ -48,9 +85,12 @@ const updateUserByEmail = async (req, res) => {
         return res.status(400).send({ error: 'Invalid updates!' });
     }
 
-
     try {
-        const result = await User.findOneAndUpdate({ email }, req.body, { new: true, runValidators: true });
+        const result = await User.findOne({ email });
+        updates.forEach((update) => user[update] = req.body[update]);
+        await result.save();
+
+        // const result = await User.findOneAndUpdate({ email }, req.body, { new: true, runValidators: true });
         if (!result) {
             return res.status(404).send('No such email!');
         }
@@ -73,14 +113,14 @@ const deleteUserByEmail = async (req, res) => {
         const result = await User.findOneAndDelete({ email });
 
         if (!result) {
-            res.status(404).send('No such email!');
+            return res.status(404).send('No such email!');
         }
         else {
             const renterRes = await Renter.findOneAndDelete({ email });
             const hostRes = await Host.findOneAndDelete({ email });
         }
 
-        res.status(202).send(result);
+        return res.status(202).send(result);
     } catch (err) {
         res.status(400).send();
     }
@@ -88,8 +128,12 @@ const deleteUserByEmail = async (req, res) => {
 
 module.exports = {
     getUsers,
+    getUserDetails,
     getUserByEmail,
     addUser,
+    loginUser,
+    logoutUser,
+    logoutAllUsers,
     updateUserByEmail,
     deleteUserByEmail
 }

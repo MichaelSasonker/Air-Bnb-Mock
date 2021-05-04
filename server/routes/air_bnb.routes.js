@@ -4,14 +4,17 @@ const userController = require('../controllers/user.controller');
 const renterController = require('../controllers/renter.controller');
 const hostController = require('../controllers/host.controller');
 const actionController = require('../controllers/action.controller');
-
-// const bankAccountController = require('../controllers/bank_account.controller');
+const auth = require('../middleware/auth.middleware');
 
 
 /* Users Routes: */
 router.get('/users/getUsers', (req, res) => userController.getUsers(req, res))
-.get('/users/getUserByEmail/:email', (req, res) => userController.getUserByEmail(req, res))
+.get('/users/me', auth, (req, res) => userController.getUserDetails(req, res))
+.get('/users/getUserByEmail/:email', auth, (req, res) => userController.getUserByEmail(req, res))
 .post('/users/addUser', (req, res) => userController.addUser(req, res))
+.post('/users/loginUser', (req, res) => userController.loginUser(req, res))
+.post('/users/logoutUser', auth, (req, res) => userController.logoutUser(req, res))
+.post('/users/logoutAll', auth, (req, res) => userController.logoutAllUsers(req, res))
 .patch('/users/updateUserByEmail/:email', (req, res) => userController.updateUserByEmail(req, res))
 .delete('/users/deleteUserByEmail/:email', (req, res) => userController.deleteUserByEmail(req, res));
 
