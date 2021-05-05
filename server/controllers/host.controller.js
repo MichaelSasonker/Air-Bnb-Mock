@@ -1,6 +1,7 @@
 const Host = require('../models/host.model');
 const isValidUserEmail = require('../utils/isValidEmail');
 
+//admin
 const getHosts = async (req, res) => {
     try {
         const result = await Host.find({});
@@ -10,6 +11,16 @@ const getHosts = async (req, res) => {
     }
 }
 
+//user
+const getHostDetails = async (req, res) => {
+    const host = await Host.findOne({ email: req.user.email, owner: req.user._id });
+    if (!host) {
+        return res.status(404).send('You need to sign in as host!');
+    }
+    return res.status(200).send(host);
+}
+
+//admin 
 const getHostByEmail = async (req, res) => {
     const email = req.params.email;
     try {
@@ -24,11 +35,16 @@ const getHostByEmail = async (req, res) => {
     }
 }
 
+//user
 const addHost = async (req, res) => {
-    const newHost = req.body;
-    const isValid = await isValidUserEmail(newHost.email);
-    const host = new Host(newHost);
+
+    const isValid = await isValidUserEmail(req.body.email);
     
+    const host = new Renter({
+        ...req.body,
+        owner: req.user._id
+    });
+
     try {
         if (isValid) {
             await host.save();
@@ -43,10 +59,9 @@ const addHost = async (req, res) => {
     }
 }
 
-const updateHostByEmail = async (req, res) => {
-    const email = req.params.email;
-    const updates = Object.keys(req.body);
+const updateAuthHost = async (req, res) => {
     //TODO: check for another ways to update the host -> NOT addressDetails.country
+    const updates = Object.keys(req.body);
     const allowedUpdates = [
         'phoneNumber', 'addressDetails.country', 'addressDetails.city', 'addressDetails.address'
         , 'apartmentDetails.description', 'apartmentDetails.rooms', 'apartmentDetails.bathes', 'apartmentDetails.beds'
@@ -59,7 +74,7 @@ const updateHostByEmail = async (req, res) => {
     }
 
     try {
-        const result = await Host.findOneAndUpdate({ email }, req.body, { new: true, runValidators: true });
+        const result = await Host.findOneAndUpdate({ email: req.user.email, owner: req.user._id }, req.body, { new: true, runValidators: true });
 
         if (!result) {
             return res.status(404).send('No such email!');
@@ -72,25 +87,41 @@ const updateHostByEmail = async (req, res) => {
     }
 }
 
-const deleteHostByEmail = async (req, res) => {
-    const email = req.params.email;
+const deleteAuthHost = async (req, res) => {
     try {
-        const result = await Host.findOneAndDelete({ email });
+        const host = await Host.findOneAndDelete({ email: req.user.email, owner: req.user._id });
 
-        if (!result) {
-            res.status(404).send('No such email!');
+        if (!host) {
+            return res.status(404).send('No such email!');
         }
 
-        res.status(202).send(result);
+        res.status(202).send(host);
     } catch (err) {
-        res.status(400).send();
+        return res.status(400).send();
     }
 }
 
+// const deleteHostByEmail = async (req, res) => {
+//     const email = req.params.email;
+//     try {
+//         const result = await Host.findOneAndDelete({ email });
+
+//         if (!result) {
+//             res.status(404).send('No such email!');
+//         }
+
+//         res.status(202).send(result);
+//     } catch (err) {
+//         res.status(400).send();
+//     }
+// }
+
 module.exports = {
     getHosts,
+    getHostDetails,
     getHostByEmail,
     addHost,
-    updateHostByEmail,
-    deleteHostByEmail
+    updateAuthHost,
+    deleteAuthHost
+    // deleteHostByEmail
 }

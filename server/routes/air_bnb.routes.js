@@ -8,36 +8,41 @@ const auth = require('../middleware/auth.middleware');
 
 
 /* Users Routes: */
-router.get('/users/getUsers', (req, res) => userController.getUsers(req, res))
-.get('/users/me', auth, (req, res) => userController.getUserDetails(req, res))
-.get('/users/getUserByEmail/:email', auth, (req, res) => userController.getUserByEmail(req, res))
+router.get('/users/getAllUsers', auth, (req, res) => userController.getUsers(req, res))//admin
+.get('/users/getUserDetails/me', auth, (req, res) => userController.getUserDetails(req, res))
+.get('/users/getUserByEmail/:email', auth, (req, res) => userController.getUserByEmail(req, res))//admin
 .post('/users/addUser', (req, res) => userController.addUser(req, res))
 .post('/users/loginUser', (req, res) => userController.loginUser(req, res))
 .post('/users/logoutUser', auth, (req, res) => userController.logoutUser(req, res))
 .post('/users/logoutAll', auth, (req, res) => userController.logoutAllUsers(req, res))
-.patch('/users/updateUserByEmail/:email', (req, res) => userController.updateUserByEmail(req, res))
-.delete('/users/deleteUserByEmail/:email', (req, res) => userController.deleteUserByEmail(req, res));
+.patch('/users/updateUser/me', auth, (req, res) => userController.updateAuthUser(req, res))
+.delete('/users/deleteUserByEmail/:email', auth, (req, res) => userController.deleteUserByEmail(req, res))//admin
+.delete('/users/deleteUser/me', auth, (req, res) => userController.deleteAuthUser(req, res));
 
 /* Renter Routes: */
-router.get('/renters/getRenters', (req, res) => renterController.getRenters(req, res))
-.get('/renters/getRenterByEmail/:email', (req, res) => renterController.getRenterByEmail(req, res))
-.post('/renters/addRenter', (req, res) => renterController.addRenter(req, res))
-.patch('/renters/updateRenterByEmail/:email', (req, res) => renterController.updateRenterByEmail(req, res))
-.delete('/renters/deleteRenterByEmail/:email', (req, res) => renterController.deleteRenterByEmail(req, res));
+router.get('/renters/getAllRenters', auth, (req, res) => renterController.getRenters(req, res))//admin
+.get('/renters/getRenterDetails/me', auth, (req, res) => renterController.getRenterDetails(req, res))
+.get('/renters/getRenterByEmail/:email', auth, (req, res) => renterController.getRenterByEmail(req, res))//admin
+.post('/renters/addRenter', auth, (req, res) => renterController.addRenter(req, res))
+.patch('/renters/updateRenter/me', auth, (req, res) => renterController.updateAuthRenter(req, res));
+// .delete('/renters/deleteRenterByEmail/:email', auth, (req, res) => renterController.deleteRenterByEmail(req, res))//admin;
 
 /* Host Routes: */
-router.get('/hosts/getHosts', (req, res) => hostController.getHosts(req, res))
-.get('/hosts/getHostByEmail/:email', (req, res) => hostController.getHostByEmail(req, res))
-.post('/hosts/addHost', (req, res) => hostController.addHost(req, res))
-.patch('/hosts/updateHostByEmail/:email', (req, res) => hostController.updateHostByEmail(req, res))
-.delete('/hosts/deleteHostByEmail/:email', (req, res) => hostController.deleteHostByEmail(req, res));
+router.get('/hosts/getAllHosts', auth, (req, res) => hostController.getHosts(req, res))
+.get('/hosts/getHostDetails/me', auth, (req, res) => hostController.getHostDetails(req, res))
+.get('/hosts/getHostByEmail/:email', auth, (req, res) => hostController.getHostByEmail(req, res))//admin
+.post('/hosts/addHost', auth, (req, res) => hostController.addHost(req, res))
+.patch('/hosts/updateHost/me', auth, (req, res) => hostController.updateAuthHost(req, res))
+.delete('/hosts/deleteHost/me', auth, (req, res) => hostController.deleteAuthHost(req, res));
+// .delete('/hosts/deleteHostByEmail/:email', auth, (req, res) => hostController.deleteHostByEmail(req, res));
 
 /* Action Routes: */
-router.get('/actions/getActions', (req, res) => actionController.getActions(req, res))
-.get('/actions/getActionByHostEmail/:hostEmail', (req, res) => actionController.getActionByHostEmail(req, res))
-.get('/actions/getActionByRenterEmail/:renterEmail', (req, res) => actionController.getActionByRenterEmail(req, res))
-.post('/actions/addAction', (req, res) => actionController.addAction(req, res))
-.delete('/actions/deleteActionByHostEmail/:hostEmail', (req, res) => actionController.deleteActionByHostEmail(req, res))
-.delete('/actions/deleteActionByRenterEmail/:renterEmail', (req, res) => actionController.deleteActionByRenterEmail(req, res));
+router.get('/actions/getAllActions', auth, (req, res) => actionController.getActions(req, res))//admin
+.get('/actions/getActionsDetails/me', auth, (req, res) => actionController.getActionsDetails(req, res))
+.get('/actions/getActionByHostEmail/:hostEmail', auth, (req, res) => actionController.getActionByHostEmail(req, res))
+// .get('/actions/getActionByRenterEmail/:renterEmail', (req, res) => actionController.getActionByRenterEmail(req, res))
+.post('/actions/addAction', auth, (req, res) => actionController.addAction(req, res))
+// .delete('/actions/deleteActionByHostEmail/:hostEmail', (req, res) => actionController.deleteActionByHostEmail(req, res))
+// .delete('/actions/deleteActionByRenterEmail/:renterEmail', (req, res) => actionController.deleteActionByRenterEmail(req, res));
 
 module.exports = router;

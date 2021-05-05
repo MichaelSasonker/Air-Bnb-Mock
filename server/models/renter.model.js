@@ -38,6 +38,11 @@ const Renter = mongoose.model('Renter', {
                 throw new Error('Invalid credit card number!');
             }
         }
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
     }
     //maybe some search details?? rooms guests...
     

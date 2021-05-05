@@ -52,7 +52,13 @@ const Action = mongoose.model('Action', {
                 throw new Error('Invalid maximum guests number!');
             }
         }
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Renter'
     }
+    //owner? 
 
 });
 

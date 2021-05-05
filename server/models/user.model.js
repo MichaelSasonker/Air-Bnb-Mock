@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const Renter = require('../models/renter.model');
+const Host = require('../models/host.model');
+const Action = require('../models/action.model');
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -53,6 +56,16 @@ const userSchema = new mongoose.Schema({
     }]
 });
 
+userSchema.methods.toJSON = function() {
+    const user = this;
+    const userObj = user.toObject();
+
+    delete userObj.password;
+    delete userObj.tokens;
+
+    return userObj;
+}
+
 userSchema.methods.generateAuthToken = async function()  {
     const user = this;
     const token = jwt.sign({ email: user.email }, 'airbnbmernproject');
@@ -87,7 +100,14 @@ userSchema.pre('save', async function(next) {
     }
 
     next();
-})
+});
+
+userSchema.pre('remove', async function(next) {
+    const user = this;
+    await Renter.findOneAndDelete({ owner: user._id });
+    await Host.findOneAndDelete({ owner: user._id });
+    await Action.deleteMany({ hostEmail: user.email });
+});
 
 const User = mongoose.model('User', userSchema);
 
