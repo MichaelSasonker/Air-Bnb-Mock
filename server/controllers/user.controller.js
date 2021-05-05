@@ -48,7 +48,7 @@ const loginUser = async (req, res) => {
     try {
         const result = await User.findByCredentials(req.body.email, req.body.password);
         const token = await result.generateAuthToken();
-        
+
         return res.send({ result, token });
     } catch (err) {
         return res.status(400).send(err);
@@ -57,7 +57,8 @@ const loginUser = async (req, res) => {
 
 const logoutUser = async (req, res) => {
     try {
-        req.user.tokens = req.user.tokens.filter(token => token.token !== req.token);
+        req.user.tokens = req.user.tokens.filter((token) => token.token !== req.token);
+
         await req.user.save();
 
         return res.status(200).send('User has logout!');
@@ -70,6 +71,7 @@ const logoutAllUsers = async (req, res) => {
     try {
         req.user.tokens = [];
         await req.user.save();
+        
         return res.status(200).send('User has logout from all devices!');
     } catch (err) {
         return res.status(500).send();
