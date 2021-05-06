@@ -38,13 +38,18 @@ const getRenterByEmail = async (req, res) => {
 
 //user
 const addRenter = async (req, res) => {
+    let renter;
 
     const isValid = await isValidUserEmail(req.body.email);
 
-    const renter = new Renter({
-        ...req.body,
-        owner: req.user._id
-    });
+    if (req.body.email === req.user.email) {
+        renter = new Renter({
+            ...req.body,
+            owner: req.user._id
+        });
+    } else {
+        return res.status(403).send('You can only add renter with your email!');
+    }
     
     try {
         if (isValid) {

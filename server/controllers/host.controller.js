@@ -1,7 +1,7 @@
 const Host = require('../models/host.model');
 const isValidUserEmail = require('../utils/isValidEmail');
 
-//admin
+//user
 const getHosts = async (req, res) => {
     try {
         const result = await Host.find({});
@@ -37,13 +37,18 @@ const getHostByEmail = async (req, res) => {
 
 //user
 const addHost = async (req, res) => {
-
+    let host;
+    
     const isValid = await isValidUserEmail(req.body.email);
     
-    const host = new Renter({
-        ...req.body,
-        owner: req.user._id
-    });
+    if(req.body.email == req.user.email) {
+        host = new Host({
+            ...req.body,
+            owner: req.user._id
+        });
+    } else {
+        return res.status(403).send('You can only add host with your email!');
+    }
 
     try {
         if (isValid) {
@@ -59,6 +64,7 @@ const addHost = async (req, res) => {
     }
 }
 
+//user
 const updateAuthHost = async (req, res) => {
     //TODO: check for another ways to update the host -> NOT addressDetails.country
     const updates = Object.keys(req.body);
@@ -87,6 +93,7 @@ const updateAuthHost = async (req, res) => {
     }
 }
 
+//user
 const deleteAuthHost = async (req, res) => {
     try {
         const host = await Host.findOneAndDelete({ email: req.user.email, owner: req.user._id });

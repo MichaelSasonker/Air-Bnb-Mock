@@ -48,12 +48,30 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
+    userRole: {
+        type: String,
+        required: false,
+        enum: ['user', 'admin'],
+        default: 'user',
+    },
     tokens: [{
         token: {
             type: String,
             required: true
         }
     }]
+});
+
+userSchema.virtual('hosts', {
+    ref: 'Host',
+    localField: '_id',
+    foreignField: 'owner',
+});
+
+userSchema.virtual('renters', {
+    ref: 'Renter',
+    localField: '_id',
+    foreignField: 'owner',
 });
 
 userSchema.methods.toJSON = function() {

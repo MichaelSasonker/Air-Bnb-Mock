@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const isPositiveInt = require('../utils/is_positive_int_function');
+const Renter = require('../models/renter.model')
 
 const Action = mongoose.model('Action', {
     hostEmail: {
@@ -55,10 +56,9 @@ const Action = mongoose.model('Action', {
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: 'Renter'
     }
-    //owner? 
 
 });
 

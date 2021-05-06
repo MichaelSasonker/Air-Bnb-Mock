@@ -76,7 +76,7 @@ const addAction = async (req, res) => {
     const host = await Host.findOne({ email: req.body.hostEmail });
 
     try {
-        if (isValidRenter && host) {
+        if (isValidRenter && host && req.user.email === req.body.renterEmail) {
             let isValidDatesRes = await isValidDatesRange(req.body.fromDate, req.body.toDate, req.body.hostEmail)
             if (!isValidDatesRes) {
                 return res.status(404).send('These dates are NOT available!');
