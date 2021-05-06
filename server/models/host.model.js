@@ -139,3 +139,8 @@ const Host = mongoose.model('Host', {
 });
 
 module.exports = Host;
+
+        // imagesArr: {
+        //         type: Buffer,
+        //         required: true
+        //     },

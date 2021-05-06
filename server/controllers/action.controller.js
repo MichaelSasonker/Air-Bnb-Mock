@@ -69,8 +69,6 @@ const getActionByHostEmail = async (req, res) => {
 
 //user
 const addAction = async (req, res) => {
-    let action;
-    let isValidDatesRes;
 
     const host = await Host.findOne({ email: req.body.hostEmail });
     const renter = await Renter.findOne({ email: req.body.renterEmail });
@@ -80,15 +78,15 @@ const addAction = async (req, res) => {
     try {
         if (renter && host) {
             if (req.user.email === req.body.renterEmail) {
-                action = new Action({
-                    ...req.body,
-                    owner: renter._id
-                });
-            } else {
                 return res.status(403).send('You can only add action with your renter email!');
             }
 
-            isValidDatesRes = await isValidDatesRange(req.body.fromDate, req.body.toDate, req.body.hostEmail)
+            const action = new Action({
+                ...req.body,
+                owner: renter._id
+            });
+
+            const isValidDatesRes = await isValidDatesRange(req.body.fromDate, req.body.toDate, req.body.hostEmail)
             if (!isValidDatesRes) {
                 return res.status(404).send('These dates are NOT available!');
             }

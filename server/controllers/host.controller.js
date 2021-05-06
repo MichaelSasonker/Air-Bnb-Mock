@@ -1,5 +1,6 @@
 const Host = require('../models/host.model');
 const isValidUserEmail = require('../utils/isValidEmail');
+const sharp = require('sharp');
 
 //user
 const getHosts = async (req, res) => {
@@ -35,23 +36,37 @@ const getHostByEmail = async (req, res) => {
     }
 }
 
-//user
-const addHost = async (req, res) => {
-    let host;
-    
-    const isValid = await isValidUserEmail(req.body.email);
-    
-    if(req.body.email == req.user.email) {
-        host = new Host({
-            ...req.body,
-            owner: req.user._id
-        });
-    } else {
-        return res.status(403).send('You can only add host with your email!');
+//user 
+const getHostImage = async (req, res) => {
+    try {
+        const host = await Host.findOne({ email: req.user.email, owner: req.user._id });
+        if (!host) {
+            throw new Error();
+        }
+
+    } catch (err) {
+        return res.status(404).send();
     }
 
+}
+
+//user
+const addHost = async (req, res) => {
+    const isValid = await isValidUserEmail(req.body.email);
+    
+    if(req.body.email !== req.user.email) {
+        return res.status(403).send('You can only add host with your email!');
+    } 
+
+    const host = new Host({
+        ...req.body,
+        owner: req.user._id
+    });
     try {
         if (isValid) {
+            // const buffer = await sharp(req.file.buffer).resize({ width: 500, height: 500 }).png().toBuffer();
+            // host.apartmentDetails.imagesArr = buffer;
+            // console.log(host)
             await host.save();
             return res.status(201).send(host);
         }
@@ -127,6 +142,7 @@ module.exports = {
     getHosts,
     getHostDetails,
     getHostByEmail,
+    getHostImage,
     addHost,
     updateAuthHost,
     deleteAuthHost
