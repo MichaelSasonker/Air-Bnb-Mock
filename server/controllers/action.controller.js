@@ -1,6 +1,6 @@
 const Host = require('../models/host.model');
 const Action = require('../models/action.model');
-const isValidRenterEmail = require('../utils/isValidRenterEmail');
+// const isValidRenterEmail = require('../utils/isValidRenterEmail');
 const isValidDatesRange = require('../utils/isValidDatesRange');
 
 //admin
@@ -69,15 +69,26 @@ const getActionByHostEmail = async (req, res) => {
 
 //user
 const addAction = async (req, res) => {
-    const isValidRenter = await isValidRenterEmail(req.user.email);
+    let action;
+    let isValidDatesRes;
+
+    const host = await Host.findOne({ email: req.body.hostEmail });
+    const renter = await Renter.findOne({ email: req.body.renterEmail });
+    // const isValidRenter = await isValidRenterEmail(req.user.email);
     //only renter can add action! (in React)
 
-    const action = new Action(req.body);
-    const host = await Host.findOne({ email: req.body.hostEmail });
-
     try {
-        if (isValidRenter && host && req.user.email === req.body.renterEmail) {
-            let isValidDatesRes = await isValidDatesRange(req.body.fromDate, req.body.toDate, req.body.hostEmail)
+        if (renter && host) {
+            if (req.user.email === req.body.renterEmail) {
+                action = new Action({
+                    ...req.body,
+                    owner: renter._id
+                });
+            } else {
+                return res.status(403).send('You can only add action with your renter email!');
+            }
+
+            isValidDatesRes = await isValidDatesRange(req.body.fromDate, req.body.toDate, req.body.hostEmail)
             if (!isValidDatesRes) {
                 return res.status(404).send('These dates are NOT available!');
             }

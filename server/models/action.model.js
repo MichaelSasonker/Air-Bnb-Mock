@@ -56,10 +56,9 @@ const Action = mongoose.model('Action', {
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
-        required: false,
+        required: true,
         ref: 'Renter'
     }
-
 });
 
 module.exports = Action;
