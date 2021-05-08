@@ -1,19 +1,12 @@
 import React from 'react'
-import './App.css';
-import { Route } from 'react-router';
-import User from './components/user.component';
-import { BrowserRouter } from 'react-router-dom';
+import AirBnbMock from './air_bnb_mock';
 
-function App() {
-
+const App = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <Route exact path='/' component={User} />
-      </BrowserRouter>
-
-    </div>
+    <React.Fragment>
+      <AirBnbMock />
+    </React.Fragment>
   );
-}
+};
 
 export default App;

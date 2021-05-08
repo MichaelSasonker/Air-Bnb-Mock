@@ -4,7 +4,7 @@ const User = require('../models/user.model');
 const auth = async (req, res, next) => {
     try {
         const token = req.header('Authorization').replace('Bearer ', '');
-        const decoded = jwt.verify(token, 'airbnbmernproject');
+        const decoded = jwt.verify(token, process.env.PUBLIC_KEY);
         const user = await User.findOne({ email: decoded.email, 'tokens.token': token });
 
         if (!user) {

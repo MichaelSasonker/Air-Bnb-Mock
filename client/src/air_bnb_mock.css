@@ -1,0 +1,55 @@
+@font-face
+{
+    src: url(./fonts//Circular-Std-Font/Circular\ Std\ Font.otf);
+    font-family: Circ;
+}
+
+@font-face
+{
+    src: url(./fonts/airbnb-cereal-app-cufonfonts/AirbnbCerealBlack.ttf);
+    font-family: airBnbBlack;
+}
+
+@font-face
+{
+    src: url(./fonts/airbnb-cereal-app-cufonfonts/AirbnbCerealMedium.ttf);
+    font-family: airBnbMed;
+}
+
+@font-face
+{
+    src: url(./fonts/airbnb-cereal-app-cufonfonts/AirbnbCerealBook.ttf);
+    font-family: airBnbBook;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    font-family: 'airBnbBook';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #222;
+    background: #fefefe;
+    position: relative;
+}
+
+input,
+button {
+    height: 30px;
+    width: 80px;
+    background: transparent;
+    border: none;
+    font-size: 12px;
+}
+
+input:hover,
+button:hover {
+    cursor: pointer;
+}
