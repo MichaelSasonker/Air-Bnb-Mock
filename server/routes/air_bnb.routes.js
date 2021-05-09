@@ -29,7 +29,7 @@ router.get('/renters/getAllRenters', auth, adminAuth, (req, res) => renterContro
 // .delete('/renters/deleteRenterByEmail/:email', auth, (req, res) => renterController.deleteRenterByEmail(req, res))//admin;
 
 /* Host Routes: */
-router.get('/hosts/getAllHosts', auth, (req, res) => hostController.getHosts(req, res))
+router.get('/hosts/getAllHosts', (req, res) => hostController.getHosts(req, res))
 .get('/hosts/getHostDetails/me', auth, (req, res) => hostController.getHostDetails(req, res))
 .get('/hosts/getHostByEmail/:email', auth, adminAuth, (req, res) => hostController.getHostByEmail(req, res))//admin
 .get('hosts/getHostImage/me', auth, (req, res) => hostController.getHostImage(req, res))

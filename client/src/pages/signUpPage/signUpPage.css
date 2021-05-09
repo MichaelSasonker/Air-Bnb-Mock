@@ -1,0 +1,19 @@
+.sign-up-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.bck-image {
+    height: 100vh;
+    width: 100%;
+    background: url('../../images/rolands-varsbergs-R-Z1BYePvd8-unsplash.jpg') center center/cover;
+    position: relative;
+    z-index: -100;
+    opacity: 0.9;
+}
+

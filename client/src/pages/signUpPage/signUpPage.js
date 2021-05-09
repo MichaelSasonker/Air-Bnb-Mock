@@ -1,26 +1,27 @@
 import React from 'react';
-import InputComp from '../../components/input/input.component';
-import LabelComp from '../../components/label/label.component';
+import SignUpForm from '../../components/signUpForm/signUpForm.component';
+import SignUpSuccess from '../../components/signUpSuccess/signUpSuccess.component';
+
+import './signUpPage.css';
 
 const SignUpPage = () => {
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(e);
-    }
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
 
-    return (
-        <div className='sign-up-page-cont'>
-            <form onSubmit={(e) => handleSubmit(e)} >
-                <LabelComp 
-                    forWhich='first-name' 
-                    labelValue='First Name:'                
-                    clsName='fName-lbl'
-                />
+  const submitForm = () => {
+    setIsSubmitted(true);
+  }
 
-            </form>
-        </div>
-    );
+  return (
+    <div className='sign-up-cont'>
+        <div className='bck-image'></div>
+        {
+            !isSubmitted 
+            ? ( <SignUpForm submitForm={submitForm} /> ) 
+            : ( <SignUpSuccess /> )
+        }
+    </div>
+  );
 };
 
 export default SignUpPage;
