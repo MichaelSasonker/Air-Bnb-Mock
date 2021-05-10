@@ -1,16 +1,12 @@
 import React from 'react';
-import validateSignUpForm from '../../utils/validateSignUpForm';
-import './signUpForm.component.css';
 import { Link } from 'react-router-dom';
+import validateLogInForm from '../../utils/validateLogInForm';
 
-const SignUpForm = ({ submitForm }) => {
+import './logInForm.component.css';
+
+const LogInForm = ({ submitForm }) => {
     
-    const [values, setValues] = React.useState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-    });
+    const [values, setValues] = React.useState({ email: '', password: '' });
     const [errors, setErrors] = React.useState({});
     const [isSubmitting, setIsSubmitting] = React.useState(false);
 
@@ -24,7 +20,7 @@ const SignUpForm = ({ submitForm }) => {
     const handleSubmit = (e) => {
       e.preventDefault();
   
-      setErrors(validateSignUpForm(values));
+      setErrors(validateLogInForm(values));
       setIsSubmitting(true);
     };
   
@@ -39,34 +35,8 @@ const SignUpForm = ({ submitForm }) => {
         <div className='form-cont'>
             <form onSubmit={(e) => handleSubmit(e)} className='form' noValidate>
                 <h1>
-                    Create your account
+                    Please log in
                 </h1>
-                <div className='form-inputs'>
-                    <label className='form-label' htmlFor='firstName'>First Name:</label>
-                    <input
-                        className='form-input'
-                        id='firstName'
-                        type='text'
-                        name='firstName'
-                        placeholder='Enter your first name'
-                        value={values.firstName}
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {errors.firstName && <p>{errors.firstName}</p>}
-                </div>
-                <div className='form-inputs'>
-                    <label className='form-label' htmlFor='lastName'>Last Name:</label>
-                    <input
-                        className='form-input'
-                        id='lastName'
-                        type='text'
-                        name='lastName'
-                        placeholder='Enter your last name'
-                        value={values.lastName}
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {errors.lastName && <p>{errors.lastName}</p>}
-                </div>
                 <div className='form-inputs'>
                     <label className='form-label' htmlFor='email'>Email:</label>
                     <input
@@ -93,15 +63,15 @@ const SignUpForm = ({ submitForm }) => {
                     />
                     {errors.password && <p>{errors.password}</p>}
                 </div>
-                <button className='form-btn' type='submit'>
-                    Sign up
+                <button className='form-log-in-btn' type='submit'>
+                    Log in
                 </button>
                 <span className='form-login'>
-                    Already have an account? Login <Link to='/logInPage'>here</Link>
+                    New here? Sign up <Link to='/signUpPage'>here</Link>
                 </span>
             </form>
         </div>
     );
 };
 
-export default SignUpForm;
+export default LogInForm;

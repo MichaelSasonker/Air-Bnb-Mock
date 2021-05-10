@@ -3,6 +3,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import MainPage from './pages/mainPage/mainPage';
 import SignUpPage from './pages/signUpPage/signUpPage';
 import SignUpAsHostPage from './pages/signUpAsHostPage/signUpAsHostPage';
+import LogInPage from './pages/logInPage/logInPage';
+
 
 import './air_bnb_mock.css';
 
@@ -16,6 +18,9 @@ const AirBnbMock = () => {
                 </Route>
                 <Route path='/signUpPage' exact>
                     <SignUpPage />
+                </Route>
+                <Route path='/logInPage' exact>
+                    <LogInPage />
                 </Route>
                 <Route path='/signUpAsHostPage'>
                     <SignUpAsHostPage />

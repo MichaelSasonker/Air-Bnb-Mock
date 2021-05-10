@@ -1,0 +1,9 @@
+.log-bck-image {
+    height: 100vh;
+    width: 100%;
+    background: url('../../images/daniel-gamboa-V9oQO0fB8LI-unsplash.jpg') center center/cover;
+    position: relative;
+    z-index: -100;
+    opacity: 0.9;
+}
+

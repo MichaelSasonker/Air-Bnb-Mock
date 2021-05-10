@@ -6,15 +6,17 @@ const validateSignUpForm = (values) => {
     
     if (!values.firstName.trim()) {
       errors.firstName = 'First name is required';
-    } else if (values.firstName.length > 2 && values.firstName.length < 10) {
-        errors.firstName = 'First name needs to be at least 2 characters or more';
-    }
-    
+    } 
+    // else if (values.firstName.length > 2 && values.firstName.length < 10) {
+    //     errors.firstName = 'First name needs to be at least 2 characters or more';
+    // }
+
     if (!values.lastName.trim()) {
         errors.lastName = 'Last name is required';
-    } else if (values.lastName.length > 2 && values.lastName.length < 10) {
-        errors.lastName = 'Last name needs to be at least 2 characters or more';
-    }// cant start with number!
+    } 
+    // else if (values.lastName.length > 2 && values.lastName.length < 10) {
+    //     errors.lastName = 'Last name needs to be at least 2 characters or more';
+    // }// cant start with number!
 
     
     if (!values.email) {

@@ -1,10 +1,12 @@
 import React from 'react';
-// import './Form.css';
+import './signUpSuccess.component.css';
 
 const SignUpSuccess = () => {
     return (
         <div className='sign-up-success-cont'>
-            <h1 className='h1-success'>We have received your request!</h1>
+            <h1 className='h1-success'>
+                We have received your request!
+            </h1>
         </div>
     );
 };
