@@ -1,5 +1,6 @@
 const Host = require('../models/host.model');
 const isValidUserEmail = require('../utils/isValidEmail');
+const sharp = require('sharp');
 
 //all
 const getHosts = async (req, res) => {

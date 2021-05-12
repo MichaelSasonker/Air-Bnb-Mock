@@ -13,7 +13,19 @@
     width: 100%;
     background: url('../../images/rolands-varsbergs-R-Z1BYePvd8-unsplash.jpg') center center/cover;
     position: relative;
-    z-index: -100;
+    /* z-index: -100; */
     opacity: 0.9;
 }
 
+.error {
+    position: absolute;
+    left: center;
+    top: 140px;
+    font-size: 30px;
+    background: #fff;
+    color: red;
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    /* z-index: 4000; */
+}

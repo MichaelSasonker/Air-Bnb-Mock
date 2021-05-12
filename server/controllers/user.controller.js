@@ -36,13 +36,20 @@ const getUserByEmail = async (req, res) => {
 const addUser = async (req, res) => {
     const newUser = req.body;
     const user = new User(newUser);
+    const isExist = await User.find({ email: user.email });
     
     try {
+        console.log(isExist);
+        if (isExist.length !== 0) {
+            return res.status(400).send('Email already exist!')
+        }
+
         await user.save();
         const token = await user.generateAuthToken();
 
         return res.status(201).send({ user, token });
     } catch (err) {
+        console.log('here')
 
         return res.status(400).send(err);
     }

@@ -1,7 +1,9 @@
 .header-cont {
-    height: 100px;
-    background: transparent;
+    height: fit-content;
+    background: #fefefe;
+    opacity: 0.8;
     width: 100%;
+    position: sticky;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -15,4 +17,11 @@
     align-items: center;
     justify-content: center;
     margin-right: -50px;
+}
+
+.logo-cont {
+    background: url('../../images/new.png') center center/cover;
+    height: 90px;
+    width: 110px;
+    margin-left: -50px;
 }

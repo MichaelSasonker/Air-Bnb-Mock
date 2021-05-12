@@ -3,7 +3,7 @@ import validateSignUpForm from '../../utils/validateSignUpForm';
 import './signUpForm.component.css';
 import { Link } from 'react-router-dom';
 
-const SignUpForm = ({ submitForm }) => {
+const SignUpForm = ({ submitForm, isError }) => {
     
     const [values, setValues] = React.useState({
       firstName: '',
@@ -13,6 +13,7 @@ const SignUpForm = ({ submitForm }) => {
     });
     const [errors, setErrors] = React.useState({});
     const [isSubmitting, setIsSubmitting] = React.useState(false);
+    // const [serverError, setServerError] = React.useState(false)
 
     const handleChange = (e) => {
       setValues({
@@ -78,6 +79,7 @@ const SignUpForm = ({ submitForm }) => {
                         value={values.email}
                         onChange={(e) => handleChange(e)}
                     />
+                    {isError && <p>Email already exsit!</p>}
                     {errors.email && <p>{errors.email}</p>}
                 </div>
                 <div className='form-inputs'>

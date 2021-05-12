@@ -1,9 +1,15 @@
+.sign-up-cont {
+    height: 50vh;
+    width: 100%;
+    position: relative;
+}
+
 .log-bck-image {
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background: url('../../images/daniel-gamboa-V9oQO0fB8LI-unsplash.jpg') center center/cover;
     position: relative;
-    z-index: -100;
+    /* z-index: -100; */
     opacity: 0.9;
 }
 

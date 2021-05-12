@@ -1,7 +1,7 @@
 
 const validateSignUpForm = (values) => {
 
-    let strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    let strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})");
     let errors = {};
     
     if (!values.firstName.trim()) {
@@ -23,7 +23,7 @@ const validateSignUpForm = (values) => {
       errors.email = 'Email required';
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
       errors.email = 'Email address is invalid';
-    }
+    } 
     
 
     if (!values.password) {

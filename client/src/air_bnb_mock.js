@@ -4,7 +4,7 @@ import MainPage from './pages/mainPage/mainPage';
 import SignUpPage from './pages/signUpPage/signUpPage';
 import SignUpAsHostPage from './pages/signUpAsHostPage/signUpAsHostPage';
 import LogInPage from './pages/logInPage/logInPage';
-
+import HeaderComp from './components/header/header.component';
 
 import './air_bnb_mock.css';
 
@@ -13,6 +13,7 @@ const AirBnbMock = () => {
     return (
         <React.Fragment>
             <BrowserRouter>
+                <HeaderComp />
                 <Route path='/' exact>
                     <MainPage />
                 </Route>
@@ -22,7 +23,7 @@ const AirBnbMock = () => {
                 <Route path='/logInPage' exact>
                     <LogInPage />
                 </Route>
-                <Route path='/signUpAsHostPage'>
+                <Route path='/signUpAsHostPage' exact>
                     <SignUpAsHostPage />
                 </Route>
             </BrowserRouter>

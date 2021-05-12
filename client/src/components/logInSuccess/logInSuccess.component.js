@@ -3,8 +3,8 @@ import React from 'react';
 
 const LogInSuccess = () => {
     return (
-        <div className='log-in-success-cont'>
-            <h1 className='log-h1-success'>
+        <div className='sign-up-success-cont'>
+            <h1 className='h1-success'>
                 Welcome back!
             </h1>
         </div>

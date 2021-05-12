@@ -12,14 +12,27 @@ const SignUpPage = () => {
 
     const history = useHistory();
     const [isSubmitted, setIsSubmitted] = React.useState(false);
+    const [serverError, setServerError] = React.useState(false)
 
     const submitForm = async (values) => {
-        setIsSubmitted(true);
-        const newUser = await createUser(values, localHostBackAddUserURL);
-        localStorage.setItem('token', newUser.data.token);
-        setTimeout(() => {
-            history.push(`/`);
-        }, 1500);
+        try {
+            //check how to remove the message!
+            // setServerError(false);
+            const newUser = await createUser(values, localHostBackAddUserURL);
+            if (newUser.error) {
+                setServerError(true);
+            }
+            else {
+                localStorage.setItem('token', newUser.data.token);
+                setIsSubmitted(true);
+                setTimeout(() => {
+                    history.push(`/`);
+                }, 1500);
+            }
+
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     return (
@@ -27,7 +40,7 @@ const SignUpPage = () => {
             <div className='bck-image'></div>
             {
                 !isSubmitted 
-                ? ( <SignUpForm submitForm={submitForm} /> ) 
+                ? ( <SignUpForm submitForm={submitForm} isError={serverError} /> ) 
                 : ( <SignUpSuccess /> )
             }
         </div>

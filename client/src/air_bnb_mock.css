@@ -53,3 +53,10 @@ input:hover,
 button:hover {
     cursor: pointer;
 }
+
+li, a, ul {
+    text-decoration: none;
+    list-style: none;
+    color: #000;
+}
+
