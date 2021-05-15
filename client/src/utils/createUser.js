@@ -12,7 +12,7 @@ const createUser = async (valuesObj, targetURL) => {
 
         return newUser;
     } catch (err) {
-        return {error: err.response.data};
+        return { error: err.response.data };
     }
 }
 

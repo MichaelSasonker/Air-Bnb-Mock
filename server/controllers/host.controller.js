@@ -1,6 +1,7 @@
 const Host = require('../models/host.model');
 const isValidUserEmail = require('../utils/isValidEmail');
 const sharp = require('sharp');
+const { count } = require('../models/host.model');
 
 //all
 const getHosts = async (req, res) => {
@@ -43,6 +44,9 @@ const getHostImage = async (req, res) => {
         if (!host) {
             throw new Error();
         }
+        
+        res.set('Content-Type', 'image/png'); 
+        return res.status(200).send(host.apartmentDetails.image)
 
     } catch (err) {
         return res.status(404).send();
@@ -52,20 +56,33 @@ const getHostImage = async (req, res) => {
 
 //user
 const addHost = async (req, res) => {
-    const isValid = await isValidUserEmail(req.body.email);
-    
-    if(req.body.email !== req.user.email) {
+    const { email, phoneNumber, country, city, address, description, rooms, beds, bathes, price, maxGuests } = req.body;
+    const isValid = await isValidUserEmail(email);
+    console.log(isValid)
+    // console.log(req)
+    // console.log(req.user.email)
+    if(email !== req.user.email) {
         return res.status(403).send('You can only add host with your email!');
     } 
 
     const host = new Host({
-        ...req.body,
+        email,
+        phoneNumber,
+        'addressDetails.city': city,
+        'addressDetails.country': country,
+        'addressDetails.address': address,
+        'apartmentDetails.description': description,
+        'apartmentDetails.rooms': rooms,
+        'apartmentDetails.beds': beds,
+        'apartmentDetails.bathes': bathes,
+        'apartmentDetails.price': price,
+        'apartmentDetails.maxGuests': maxGuests,
         owner: req.user._id
     });
     try {
         if (isValid) {
-            // const buffer = await sharp(req.file.buffer).resize({ width: 500, height: 500 }).png().toBuffer();
-            // host.apartmentDetails.imagesArr = buffer;
+            const buffer = await sharp(req.file.buffer).resize({ width: 500, height: 500 }).png().toBuffer();
+            host.apartmentDetails.image = buffer;
             // console.log(host)
             await host.save();
             return res.status(201).send(host);

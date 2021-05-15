@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import InputComp from '../input/input.component';
 import ButtonComp from '../button/button.component';
-import SelectCopm from '../select-semantic/select.component';
+import SelectComp from '../select/select.component';
 
 import './header.component.css';
 
@@ -19,7 +19,7 @@ const HeaderComp = () => {
                 <Link to='/signUpAsHostPage'>
                     <ButtonComp clsName='host-sign' inputValue='Become a host' />
                 </Link>
-                <SelectCopm />
+                <SelectComp />
             </div>
         </div>
     );

@@ -1,0 +1,18 @@
+.select {
+    height: max-content;
+    width: max-content;
+    border: none;
+    background: transparent;
+    appearance: none;
+    font-size: 14px;
+    font-family: 'airBnbMed';
+    text-align: center;
+}
+
+.select:focus {
+    outline: none;
+}
+
+/* select:invalid {
+    color: red;
+} */

@@ -96,14 +96,18 @@ const Host = mongoose.model('Host', {
                 }
             }
         },
-        imagesArr: {
-            type: Array,
-            required: true,
-            validate(value) {
-                if (value.length < 3) {
-                    throw new Error('Images array must contains at least three images!');
-                }
-            }
+        // imagesArr: {
+        //     type: Array,
+        //     required: true,
+        //     validate(value) {
+        //         if (value.length < 3) {
+        //             throw new Error('Images array must contains at least three images!');
+        //         }
+        //     }
+        // },
+        image: {
+            type: Buffer,
+            //required: true
         },
         price: {
             type: Number,
@@ -140,7 +144,3 @@ const Host = mongoose.model('Host', {
 
 module.exports = Host;
 
-        // imagesArr: {
-        //         type: Buffer,
-        //         required: true
-        //     },
