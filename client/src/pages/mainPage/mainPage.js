@@ -8,6 +8,7 @@ const MainPage = () => {
     const [spinner, setSpinner] = React.useState(true);
     const [hostData, setHostData] = React.useState([]);
 
+
     const pullData = async () => {
         try {
             let respone = await getData('http://127.0.0.1:8000/api/airBnb/hosts/getAllHosts');
@@ -23,9 +24,7 @@ const MainPage = () => {
 
     React.useEffect(() => {
         pullData();
-
     }, []);
-
 
     return (
         <div className='main-page-cont'>

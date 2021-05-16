@@ -5,7 +5,7 @@ import OptionComp from '../option/option.component';
 import './select.component.css';
 
 const options = ['Sign Up', 'Log In', 'Host your home'];
-const linksOption = ['/signUpPage', '/logInPage', '/signUpAsHost'];
+const linksOption = ['/signUpPage', '/logInPage', '/signUpAsHostPage'];
 
 const SelectComp = () => {
 

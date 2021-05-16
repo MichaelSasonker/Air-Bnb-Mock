@@ -1,0 +1,29 @@
+.host-sign-up-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
+    min-height: 182vh;
+    position: relative;
+}
+
+.host-bck-image {
+    height: 182vh;
+    width: 100%;
+    background: url('../../images/sebastian-hages-oM6Za8qQi20-unsplash.jpg') center center/cover;
+    position: relative;
+    opacity: 0.9;
+}
+
+.host-error {
+    position: absolute;
+    left: center;
+    top: 140px;
+    font-size: 30px;
+    background: #fff;
+    color: red;
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+}

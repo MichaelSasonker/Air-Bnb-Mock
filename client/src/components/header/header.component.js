@@ -3,11 +3,18 @@ import { Link } from 'react-router-dom';
 import InputComp from '../input/input.component';
 import ButtonComp from '../button/button.component';
 import SelectComp from '../select/select.component';
+import LogInButton from '../logInButton/logInButton.component';
 
 import './header.component.css';
 
 
-const HeaderComp = () => {
+const HeaderComp = ({ tokenProp }) => {
+
+    const [token, setToken] = React.useState(null);
+
+    React.useEffect(() => {
+        setToken(tokenProp);
+    }, [token]);
 
     return (
         <div className='header-cont'>
@@ -20,6 +27,11 @@ const HeaderComp = () => {
                     <ButtonComp clsName='host-sign' inputValue='Become a host' />
                 </Link>
                 <SelectComp />
+                {
+                    token !== null
+                    ? <Link to='/myAccountPage'> <LogInButton /> </Link> 
+                    : ''  
+                }
             </div>
         </div>
     );

@@ -10,10 +10,16 @@ import './air_bnb_mock.css';
 
 const AirBnbMock = () => {
 
+    const [token, setToken] = React.useState(null);
+
+    React.useEffect(() => {
+        setToken(localStorage.getItem('token'));
+    }, [token]);
+
     return (
         <React.Fragment>
             <BrowserRouter>
-                <HeaderComp />
+                <HeaderComp tokenProp={token}/>
                 <Route path='/' exact>
                     <MainPage />
                 </Route>

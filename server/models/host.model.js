@@ -25,112 +25,99 @@ const Host = mongoose.model('Host', {
         //     }
         // }
     },
-    addressDetails: {
-        country: {
-            type: String,
-            required: true,
-            trim: true,
-            async validate(value) {
-                const isValid = await isValidCountryName(value);
-                if (!isValid) {
-                    throw new Error('No such country!');
-                }     
-            }
-        },
-        city: {
-            type: String,
-            required: true,
-            trim: true,
-            async validate(value) {
-                const isValid = await isValidCityName(value);
-                if (!isValid) {
-                    throw new Error('No such country!');
-                }     
-            }
-        },
-        address: {
-            type: String,
-            required: true,
-            trim: true,
-           //validate adress!!! 
+    country: {
+        type: String,
+        required: true,
+        trim: true,
+        async validate(value) {
+            const isValid = await isValidCountryName(value);
+            if (!isValid) {
+                throw new Error('No such country!');
+            }     
         }
     },
-    apartmentDetails: {
-        description: {
-            type: String,
-            required: true,
-            trim: true,
-            validate(value) {
-                if (value.length <= 10) {
-                    throw new Error('Description is need to be at least 10 letters!');
-                }
+    city: {
+        type: String,
+        required: true,
+        trim: true,
+        async validate(value) {
+            const isValid = await isValidCityName(value);
+            if (!isValid) {
+                throw new Error('No such country!');
+            }     
+        }
+    },
+    address: {
+        type: String,
+        required: true,
+        trim: true,
+        //validate adress!!! 
+    },
+    description: {
+        type: String,
+        required: true,
+        trim: true,
+        validate(value) {
+            if (value.length <= 10) {
+                throw new Error('Description is need to be at least 10 letters!');
             }
-        },
-        rooms: {
-            type: Number,
-            required: true,
-            trim: true,
-            validate(value) {
-                if (value <= 0 || !isPositiveInt(value)) {
-                    throw new Error('Invalid rooms number!');
-                }
+        }
+    },
+    rooms: {
+        type: Number,
+        required: true,
+        trim: true,
+        validate(value) {
+            if (value <= 0 || !isPositiveInt(value)) {
+                throw new Error('Invalid rooms number!');
             }
-        },
-        beds: {
-            type: Number,
-            required: true,
-            trim: true,
-            validate(value) {
-                if (value <= 0 || !isPositiveInt(value)) {
-                    throw new Error('Invalid beds number!');
-                }
+        }
+    },
+    beds: {
+        type: Number,
+        required: true,
+        trim: true,
+        validate(value) {
+            if (value <= 0 || !isPositiveInt(value)) {
+                throw new Error('Invalid beds number!');
             }
-        },
-        bathes: {
-            type: Number,
-            required: true,
-            trim: true,
-            validate(value) {
-                if (value <= 0 || !isPositiveInt(value)) {
-                    throw new Error('Invalid beds number!');
-                }
+        }
+    },
+    bathes: {
+        type: Number,
+        required: true,
+        trim: true,
+        validate(value) {
+            if (value <= 0 || !isPositiveInt(value)) {
+                throw new Error('Invalid beds number!');
             }
-        },
-        // imagesArr: {
-        //     type: Array,
-        //     required: true,
-        //     validate(value) {
-        //         if (value.length < 3) {
-        //             throw new Error('Images array must contains at least three images!');
-        //         }
-        //     }
-        // },
-        image: {
-            type: Buffer,
-            //required: true
-        },
-        price: {
-            type: Number,
-            required: true,
-            validate(value) {
-                if (value <=  0 || !isPositiveInt(value)) {
-                    throw new Error('Price is need to be a positive number!');
-                }
+        }
+    },
+    image: {
+        type: Buffer,
+        //required: true
+    },
+    price: {
+        type: Number,
+        required: true,
+        validate(value) {
+            if (value <=  0 || !isPositiveInt(value)) {
+                throw new Error('Price is need to be a positive number!');
             }
-        },
-        dateAdded: {
-            type: Date,
-            required: false,
-            default: Date.now()
-        },
-        maxGuests: {
-            type: Number,
-            required: true,
-            trim: true,
-            validate(value) {
-                if (value <= 0 || !isPositiveInt(value)) {
-                    throw new Error('Invalid maximum guests number!');
-                }
+        }
+    },
+    dateAdded: {
+        type: Date,
+        required: false,
+        default: Date.now()
+    },
+    maxGuests: {
+        type: Number,
+        required: true,
+        trim: true,
+        validate(value) {
+            if (value <= 0 || !isPositiveInt(value)) {
+                throw new Error('Invalid maximum guests number!');
             }
         }
     },

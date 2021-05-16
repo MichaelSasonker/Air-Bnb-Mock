@@ -44,9 +44,9 @@ const getHostImage = async (req, res) => {
         if (!host) {
             throw new Error();
         }
-        
+
         res.set('Content-Type', 'image/png'); 
-        return res.status(200).send(host.apartmentDetails.image)
+        return res.status(200).send(host.image)
 
     } catch (err) {
         return res.status(404).send();
@@ -56,34 +56,22 @@ const getHostImage = async (req, res) => {
 
 //user
 const addHost = async (req, res) => {
-    const { email, phoneNumber, country, city, address, description, rooms, beds, bathes, price, maxGuests } = req.body;
-    const isValid = await isValidUserEmail(email);
-    console.log(isValid)
-    // console.log(req)
-    // console.log(req.user.email)
-    if(email !== req.user.email) {
+    
+    const isValid = await isValidUserEmail(req.body.email);
+
+    if(req.body.email !== req.user.email) {
         return res.status(403).send('You can only add host with your email!');
     } 
 
     const host = new Host({
-        email,
-        phoneNumber,
-        'addressDetails.city': city,
-        'addressDetails.country': country,
-        'addressDetails.address': address,
-        'apartmentDetails.description': description,
-        'apartmentDetails.rooms': rooms,
-        'apartmentDetails.beds': beds,
-        'apartmentDetails.bathes': bathes,
-        'apartmentDetails.price': price,
-        'apartmentDetails.maxGuests': maxGuests,
+        ...req.body,
         owner: req.user._id
     });
+
     try {
         if (isValid) {
             const buffer = await sharp(req.file.buffer).resize({ width: 500, height: 500 }).png().toBuffer();
-            host.apartmentDetails.image = buffer;
-            // console.log(host)
+            host.image = buffer;
             await host.save();
             return res.status(201).send(host);
         }
@@ -101,9 +89,9 @@ const updateAuthHost = async (req, res) => {
     //TODO: check for another ways to update the host -> NOT addressDetails.country
     const updates = Object.keys(req.body);
     const allowedUpdates = [
-        'phoneNumber', 'addressDetails.country', 'addressDetails.city', 'addressDetails.address'
-        , 'apartmentDetails.description', 'apartmentDetails.rooms', 'apartmentDetails.bathes', 'apartmentDetails.beds'
-        , 'apartmentDetails.price', 'apartmentDetails.maxGuests' 
+        'phoneNumber', 'country', 'city', 'address'
+        , 'description', 'rooms', 'bathes', 'beds'
+        , 'price', 'maxGuests' 
     ];
 
     const isValidOperation = updates.every(update => allowedUpdates.includes(update));

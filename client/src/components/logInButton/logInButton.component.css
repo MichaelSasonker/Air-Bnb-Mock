@@ -1,0 +1,8 @@
+.log-in-btn-cont {
+    /* background: url('../../images/user-solid.svg') center center/cover; */
+    /* height: fit-content; */
+    padding: 5px;
+    width: fit-content;
+    /* border-radius: 50px; */
+    border: 1px solid #e0e0e0;
+}
