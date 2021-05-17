@@ -51,7 +51,6 @@ const getHostImage = async (req, res) => {
     } catch (err) {
         return res.status(404).send();
     }
-
 }
 
 //user

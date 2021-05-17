@@ -4,17 +4,23 @@ import InputComp from '../input/input.component';
 import ButtonComp from '../button/button.component';
 import SelectComp from '../select/select.component';
 import LogInButton from '../logInButton/logInButton.component';
+import LogOutButton from '../logOutButton/logOutButton.component';
 
 import './header.component.css';
 
 
-const HeaderComp = ({ tokenProp }) => {
+const HeaderComp = ({ tokenProp, logOutProp }) => {
 
-    const [token, setToken] = React.useState(null);
+    const [token, setToken] = React.useState(tokenProp);
 
     React.useEffect(() => {
         setToken(tokenProp);
     }, [token]);
+
+    const handleLogOutFunc = (e) => {
+        logOutProp(e);
+        // setToken(null);
+    }
 
     return (
         <div className='header-cont'>
@@ -26,10 +32,17 @@ const HeaderComp = ({ tokenProp }) => {
                 <Link to='/signUpAsHostPage'>
                     <ButtonComp clsName='host-sign' inputValue='Become a host' />
                 </Link>
+                {console.log(token)}
                 <SelectComp />
                 {
                     token !== null
-                    ? <Link to='/myAccountPage'> <LogInButton /> </Link> 
+                    ? 
+                        (
+                            <React.Fragment>
+                                <Link to='/myAccountPage'> <LogInButton /> </Link>
+                                <LogOutButton logOutFunc={handleLogOutFunc} />
+                            </React.Fragment>
+                        ) 
                     : ''  
                 }
             </div>
