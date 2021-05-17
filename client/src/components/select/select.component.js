@@ -25,7 +25,7 @@ const SelectComp = () => {
     // ui top left pointing dropdown button
     return (
         <select className='select' value={selected} onChange={(e) => handleChange(e)}>
-            <option className='place-holder' value="" disabled selected hidden>
+            <option className='place-holder' defaultValue value="" disabled hidden>
                 Go to
             </option> 
             { options.map( (optn, index) => <OptionComp key={index} optionValue={optn} /> )}
