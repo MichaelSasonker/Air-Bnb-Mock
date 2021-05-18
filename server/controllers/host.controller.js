@@ -1,7 +1,6 @@
 const Host = require('../models/host.model');
 const isValidUserEmail = require('../utils/isValidEmail');
 const sharp = require('sharp');
-const { count } = require('../models/host.model');
 
 //all
 const getHosts = async (req, res) => {
@@ -57,10 +56,7 @@ const getHostImage = async (req, res) => {
 const addHost = async (req, res) => {
     
     const isValid = await isValidUserEmail(req.body.email);
-
-    if(req.body.email !== req.user.email) {
-        return res.status(403).send('You can only add host with your email!');
-    } 
+    console.log(isValid)
 
     const host = new Host({
         ...req.body,
@@ -70,6 +66,7 @@ const addHost = async (req, res) => {
     try {
         if (isValid) {
             const buffer = await sharp(req.file.buffer).resize({ width: 500, height: 500 }).png().toBuffer();
+            
             host.image = buffer;
             await host.save();
             return res.status(201).send(host);

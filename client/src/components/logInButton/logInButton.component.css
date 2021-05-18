@@ -1,8 +1,10 @@
 .log-in-btn-cont {
-    /* background: url('../../images/user-solid.svg') center center/cover; */
-    /* height: fit-content; */
     padding: 5px;
     width: fit-content;
-    /* border-radius: 50px; */
-    border: 1px solid #b0b0b0;
+    /* border: 1px solid #b0b0b0; */
+}
+
+.log-in-btn-cont:hover {
+    border-bottom: 1px solid #b0b0b0;
+    border-top: 1px solid #b0b0b0;
 }

@@ -8,7 +8,7 @@ const Host = mongoose.model('Host', {
     email: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
         trim: true,
         validate(value) {
             if (!validator.isEmail(value)) {

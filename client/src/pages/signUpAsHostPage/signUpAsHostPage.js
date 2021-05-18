@@ -1,8 +1,9 @@
+import axios from 'axios';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import SignUpAsHostForm from '../../components/signUpAsHostForm/signUpAsHostForm.component';
 import SignUpSuccess from '../../components/signUpSuccess/signUpSuccess.component';
-import createUser from '../../utils/createUser';
+import createHost from '../../utils/createHost';
 
 import './signUpAsHostPage.css';
 
@@ -17,10 +18,17 @@ const SignUpAsHostPage = () => {
 
 
     const submitForm = async (values) => {
+        let formData = new FormData();
+        // console.log(values)
+        for (const [key, value] of Object.entries(values)) {
+            formData.append(key, value);
+        }
+
         try {
             //check how to remove the message!
             // setServerError(false);
-            const newHost = await createUser(values, localHostBackAddHostURL);
+            // const newHost = await createHost(formData, token, localHostBackAddHostURL);
+            const newHost = await axios.post(localHostBackAddHostURL, formData, { headers: { Authorization: `Bearer ${token}` }});
             if (newHost.error) {
                 setServerError(true);
             }

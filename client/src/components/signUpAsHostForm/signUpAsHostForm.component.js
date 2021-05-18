@@ -61,7 +61,7 @@ const SignUpAsHostForm = ({ submitForm, isError }) => {
                         value={values.email}
                         onChange={(e) => handleChange(e)}
                     />
-                    {isError && <p>Email already exsit!</p>}
+                    {/* {isError && <p>Email already exsit!</p>} */}
                     {errors.email && <p>{errors.email}</p>}
                 </div>
                 <div className='host-form-inputs'>
@@ -201,8 +201,8 @@ const SignUpAsHostForm = ({ submitForm, isError }) => {
                         id='image'
                         type='file'
                         name='image'
-                        value={values.image}
-                        onChange={(e) => handleChange(e)}
+                        // value={values.image}
+                        onChange={(e) => setValues({ ...values, image: e.target.files[0] })}
                     />
                     {errors.image && <p>{errors.image}</p>}
                 </div>

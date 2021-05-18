@@ -11,15 +11,8 @@ import './header.component.css';
 
 const HeaderComp = ({ tokenProp, logOutProp }) => {
 
-    const [token, setToken] = React.useState(tokenProp);
-
-    React.useEffect(() => {
-        setToken(tokenProp);
-    }, [token]);
-
     const handleLogOutFunc = (e) => {
         logOutProp(e);
-        // setToken(null);
     }
 
     return (
@@ -32,16 +25,15 @@ const HeaderComp = ({ tokenProp, logOutProp }) => {
                 <Link to='/signUpAsHostPage'>
                     <ButtonComp clsName='host-sign' inputValue='Become a host' />
                 </Link>
-                {console.log(token)}
                 <SelectComp />
                 {
-                    token !== null
+                    tokenProp !== null
                     ? 
                         (
-                            <React.Fragment>
+                            <>
                                 <Link to='/myAccountPage'> <LogInButton /> </Link>
                                 <LogOutButton logOutFunc={handleLogOutFunc} />
-                            </React.Fragment>
+                            </>
                         ) 
                     : ''  
                 }

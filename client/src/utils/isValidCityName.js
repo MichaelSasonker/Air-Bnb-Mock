@@ -9,7 +9,6 @@ const isValidCityName = async (searchedName) => {
         const counts = data.metadata.totalCount;
 
         if (counts > 0 && counts <= 2) {
-            console.log(true)
             return true;
         }
         return false;
@@ -19,7 +18,5 @@ const isValidCityName = async (searchedName) => {
     }
 }
 
-isValidCityName('new aaaa');
-// isValidCountryName('aaa');
 
 module.exports = isValidCityName;

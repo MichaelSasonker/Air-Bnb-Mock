@@ -5,7 +5,6 @@ import SignUpPage from './pages/signUpPage/signUpPage';
 import SignUpAsHostPage from './pages/signUpAsHostPage/signUpAsHostPage';
 import LogInPage from './pages/logInPage/logInPage';
 import HeaderComp from './components/header/header.component';
-import createUser from './utils/createUser';
 
 import './air_bnb_mock.css';
 import Axios from 'axios';
@@ -23,17 +22,18 @@ const AirBnbMock = () => {
     const handleLogOut = async (e) => {
         try {
             await Axios.post(logOutURLLocal, null, { headers: { Authorization: `Bearer ${token}` } });
+            localStorage.removeItem('token');
+            setToken(null);
         } catch (err) {
             console.log(err.response.data);
         }
-        localStorage.removeItem('token');
-        setToken(null);
+
     }
 
     return (
         <React.Fragment>
             <BrowserRouter>
-                <HeaderComp tokenProp={token} logOutProp={handleLogOut}/>
+                <HeaderComp tokenProp={token} logOutProp={handleLogOut} />
                 <Route path='/' exact>
                     <MainPage />
                 </Route>

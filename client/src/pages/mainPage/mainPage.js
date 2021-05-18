@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import getData from '../../utils/get_data_function';
 
 import './mainPage.css';
@@ -11,7 +12,7 @@ const MainPage = () => {
 
     const pullData = async () => {
         try {
-            let respone = await getData('http://127.0.0.1:8000/api/airBnb/hosts/getAllHosts');
+            let respone = await getData('http://localhost:8000/api/airBnb/hosts/getAllHosts');
             if (respone) {
                 setSpinner(false)
             }
@@ -27,7 +28,11 @@ const MainPage = () => {
 
     return (
         <div className='main-page-cont'>
-            <div className='header-image'></div>
+            <div className='header-image'>
+                <Link to='/signUpPage'>
+                    aaaa
+                </Link>
+            </div>
         </div>
     );
 };

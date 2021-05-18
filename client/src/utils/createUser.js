@@ -2,6 +2,7 @@ import Axios from 'axios';
 
 const createUser = async (valuesObj, targetURL) => {
     try {
+        console.log(valuesObj)
         const newUser = await Axios({
             method: 'post',
             url: targetURL,
