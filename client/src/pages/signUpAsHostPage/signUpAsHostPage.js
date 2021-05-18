@@ -56,7 +56,7 @@ const SignUpAsHostPage = () => {
             {
                 !isSubmitted 
                 ? ( <SignUpAsHostForm submitForm={submitForm} isError={serverError} /> ) 
-                : ( <SignUpSuccess /> )
+                : ( <SignUpSuccess messageProp='Your home is ready!' /> )
             }
         </div>
     );

@@ -1,11 +1,11 @@
 import React from 'react';
 import './signUpSuccess.component.css';
 
-const SignUpSuccess = () => {
+const SignUpSuccess = ({ messageProp }) => {
     return (
         <div className='sign-up-success-cont'>
             <h1 className='h1-success'>
-                We have received your request!
+                {messageProp}
             </h1>
         </div>
     );

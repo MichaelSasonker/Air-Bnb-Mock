@@ -41,7 +41,7 @@ const SignUpPage = () => {
             {
                 !isSubmitted 
                 ? ( <SignUpForm submitForm={submitForm} isError={serverError} /> ) 
-                : ( <SignUpSuccess /> )
+                : ( <SignUpSuccess messageProp='We recived your request' /> )
             }
         </div>
     );

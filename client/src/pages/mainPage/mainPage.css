@@ -10,3 +10,29 @@
     height: 45rem;
     background: url('../../images/henry-be-DpI-_wydgJM-unsplash.jpg') center center/cover;
 }
+
+.about-link-cont {
+    font-size: 4rem;
+    color: #fff;
+    width: min-content;
+    line-height: 4rem;
+    padding: 3px;
+    margin-top: 15rem;
+    margin-left: 10rem;
+    font-family: 'airBnbMed';
+}
+
+.link-btn {
+    background: #fff;
+    width: max-content;
+    padding: 0.6rem;
+    margin-left: 10rem;
+    border-radius: 0.6rem;
+    margin-top: 1.2rem;
+    font-size: 1.5rem;
+}
+
+.link-btn:hover {
+    background: #000;
+    color: #fff;
+}

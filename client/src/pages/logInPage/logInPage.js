@@ -1,7 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import LogInForm from '../../components/logInForm/logInForm.component';
-import LogInSuccess from '../../components/logInSuccess/logInSuccess.component';
+// import LogInSuccess from '../../components/logInSuccess/logInSuccess.component';
+import SignUpSuccess from '../../components/signUpSuccess/signUpSuccess.component';
 import createUser from '../../utils/createUser';
 import './logInPage.css';
 
@@ -27,7 +28,7 @@ const LogInPage = () => {
             {
                 !isSubmitted 
                 ? ( <LogInForm submitForm={submitForm} /> ) 
-                : ( <LogInSuccess /> )
+                : ( <SignUpSuccess messageProp='Welcome back!' /> )
             }
         </div>
     );
