@@ -1,0 +1,80 @@
+.host-card-cont {
+    height: 23rem;
+    display: flex;
+    width: max-content;
+    flex-direction: row;
+    align-items: center;
+    /* margin: 0 2.2rem; */
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.host-card-cont:hover {
+    background: #fdfdfd;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.host-some-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left;
+    height: 85%;
+    border-right: 1px solid #d0d0d0;
+}
+
+.host-region-details {
+    height: max-content;
+    width: 12rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    margin-left: 1rem;
+    line-height: 2rem;
+}
+
+.par-sentence {
+    font-family: 'airBnbMed';
+    font-size: 1.6rem;
+}
+
+.sentence,
+.host-description {
+    color: #747474;
+    font-size: 1rem;
+    font-family: 'airBnbBook';
+}
+
+.host-description {
+    width: min-content;
+    margin-left: 1rem;
+}
+
+.host-price-detail {
+    width: max-content;
+    text-align: left;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    font-family: 'airBnbMed';
+}
+
+.par-price {
+    font-size: 1.5rem;
+}
+
+.night {
+    font-family: 'airBnbBook';
+}
+
+.host-img {
+    height: 85%;
+    width: 100%;
+    border-radius: 2rem;
+}
+
+.host-img:hover {
+    transition-duration: 1s;
+    border-radius: 0;
+}

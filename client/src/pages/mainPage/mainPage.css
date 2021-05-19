@@ -36,3 +36,25 @@
     background: #000;
     color: #fff;
 }
+
+.middle-page-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: max-content;
+    margin: 2rem 0;
+}
+
+.host-header {
+    margin-bottom: 2rem;
+}
+
+.hosts-cont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* height: 5rem; */
+    /* margin: 4rem 0; */
+}

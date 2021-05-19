@@ -1,0 +1,34 @@
+.carousel-cont {
+    display: flex;
+}
+
+.carousel-inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-right,
+.carousel-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: max-content;
+    padding: 1rem;
+    border-radius: 50%;
+    background: #e2e2e2;
+}
+
+.carousel-left {
+    margin-right: 1.5rem;
+}
+
+.carousel-right:hover,
+.carousel-left:hover {
+    background: #222;
+    color: #fff;
+    transition-duration: 1s;
+    border-radius: 0;
+}

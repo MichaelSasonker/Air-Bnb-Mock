@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import HostCardComp from '../../components/hostCard/hostCard.component';
+import CarouselComp from '../../components/carousel/carousel.component';
+// import HostCardComp from '../../components/hostCard/hostCard.component';
 
 import './mainPage.css';
+
 
 const MainPage = ({ hostsData }) => {
 
@@ -18,13 +20,17 @@ const MainPage = ({ hostsData }) => {
                     </div>
                 </Link>
             </div>
-            <div className='hosts-cont'>
-                {console.log(hostsData)}
-                {
-                    hostsData.length > 0 
-                    ? hostsData.map((host) => <HostCardComp key={host.image} hostData={host} /> )
-                    : ''
-                }
+            <div className='middle-page-cont'>
+                <h1 className='host-header'>Some of Our Hosts:</h1>
+                {/* <div className='hosts-cont'>
+                    {console.log(hostsData)}
+                    {
+                        hostsData.length > 0 
+                        ? hostsData.map((host, index) => <HostCardComp key={index} hostData={host} /> )
+                        : ''
+                    }
+                </div> */}
+                <CarouselComp hostsData={hostsData} />
             </div>
         </div>
     );

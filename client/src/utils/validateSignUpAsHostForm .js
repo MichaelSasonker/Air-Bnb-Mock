@@ -1,5 +1,7 @@
-const isValidCountryName = require('../utils/isValidCountryName');
-const isValidCityName = require('../utils/isValidCityName')
+// const isValidCountryName = require('../utils/isValidCountryName');
+// const isValidCityName = require('../utils/isValidCityName')
+import isValidCountryName from '../utils/isValidCountryName';
+import isValidCityName from '../utils/isValidCityName';
 const isPositiveNumber = require('../utils/is_positive_int_function');
 
 const validateSignUpAsHostForm = (values) => {

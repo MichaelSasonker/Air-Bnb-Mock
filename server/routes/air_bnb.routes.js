@@ -33,10 +33,9 @@ router.get('/hosts/getAllHosts', (req, res) => hostController.getHosts(req, res)
 .get('/hosts/getHostDetails/me', auth, (req, res) => hostController.getHostDetails(req, res))
 .get('/hosts/getHostByEmail/:email', auth, adminAuth, (req, res) => hostController.getHostByEmail(req, res))//admin
 .get('/hosts/getHostImage/me', auth, (req, res) => hostController.getHostImage(req, res))
-.post(
-    '/hosts/addHost', auth, upload.single('image'), (req, res) => { hostController.addHost(req, res)}
-    , (error, req, res, next) => res.status(400).send({ error: error.message })
-)
+.post('/hosts/addHost', auth, upload.single('image'), (req, res) => { hostController.addHost(req, res)}
+    , (error, req, res, next) => res.status(400).send({ error: error.message }))
+    
 // .post('/hosts/addHost', auth, (req, res) => hostController.addHost(req, res))
 .patch('/hosts/updateHost/me', auth, (req, res) => hostController.updateAuthHost(req, res))
 .delete('/hosts/deleteHost/me', auth, (req, res) => hostController.deleteAuthHost(req, res));

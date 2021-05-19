@@ -3,12 +3,12 @@ const validator = require('validator');
 const isValidCountryName = require('../utils/isValidCountryName');
 const isValidCityName = require('../utils/isValidCityName');
 const isPositiveInt = require('../utils/is_positive_int_function');
+const isValidPhoneNumber = require('../utils/isPhoneNumber');
 
 const Host = mongoose.model('Host', {
     email: {
         type: String,
         required: true,
-        // unique: true,
         trim: true,
         validate(value) {
             if (!validator.isEmail(value)) {
@@ -19,11 +19,11 @@ const Host = mongoose.model('Host', {
     phoneNumber: {
         type: String,
         required: true,
-        // validate(value) {
-        //     if (!validator.isMobilePhone(value, 'any', { strictMode: true })) {
-        //         throw new Error('Invalid phone number!');
-        //     }
-        // }
+        validate(value) {
+            if (!isValidPhoneNumber(value)) {
+                throw new Error('Invalid phone number!');
+            }
+        }
     },
     country: {
         type: String,
@@ -51,7 +51,11 @@ const Host = mongoose.model('Host', {
         type: String,
         required: true,
         trim: true,
-        //validate adress!!! 
+        validate(value) {
+            if (value.length === 0 || value.length >= 15) {
+                throw new Error('Invalid address!');
+            }
+        } 
     },
     description: {
         type: String,

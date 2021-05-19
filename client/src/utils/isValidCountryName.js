@@ -1,9 +1,8 @@
 const axios = require('axios');
 
-
 const isValidCountryName = async (searchedName) => {
     const url = `https://restcountries.eu/rest/v2/name/`;
-
+ 
     try {
         const { data } = await axios.get(url + searchedName);
         return true;
@@ -13,7 +12,7 @@ const isValidCountryName = async (searchedName) => {
     }
 }
 
-// isValidCountryName('israel');
+// isValidCountryName('england');
 // isValidCountryName('aaa');
 
 export default isValidCountryName;

@@ -56,7 +56,6 @@ const getHostImage = async (req, res) => {
 const addHost = async (req, res) => {
     
     const isValid = await isValidUserEmail(req.body.email);
-    console.log(isValid)
 
     const host = new Host({
         ...req.body,
@@ -66,8 +65,8 @@ const addHost = async (req, res) => {
     try {
         if (isValid) {
             const buffer = await sharp(req.file.buffer).resize({ width: 500, height: 500 }).png().toBuffer();
-            
             host.image = buffer;
+            
             await host.save();
             return res.status(201).send(host);
         }

@@ -39,7 +39,6 @@ const addUser = async (req, res) => {
     const isExist = await User.find({ email: user.email });
     
     try {
-        console.log(isExist);
         if (isExist.length !== 0) {
             return res.status(400).send('Email already exist!')
         }
