@@ -16,4 +16,5 @@ const isValidCountryName = async (searchedName) => {
 // isValidCountryName('israel');
 // isValidCountryName('aaa');
 
-module.exports = isValidCountryName;
+export default isValidCountryName;
+// module.exports = isValidCountryName;
