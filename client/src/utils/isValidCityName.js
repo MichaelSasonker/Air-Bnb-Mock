@@ -18,5 +18,5 @@ const isValidCityName = async (searchedName) => {
     }
 }
 
-
-module.exports = isValidCityName;
+export default isValidCityName;
+// module.exports = isValidCityName;

@@ -27,4 +27,5 @@ const isValidDatesRange = async (startDate, endDate, hostEmail) => {
     return result;
 }
 
-module.exports = isValidDatesRange;
+// module.exports = isValidDatesRange;
+export default isValidDatesRange;
