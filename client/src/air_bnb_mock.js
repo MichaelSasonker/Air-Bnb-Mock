@@ -96,7 +96,6 @@ const AirBnbMock = () => {
                                 hostsData.map((hostObj, index) => {
                                     return (
                                         <Route key={index} path={`/${hostObj.city}/${hostObj.owner}`} exact>
-                                            {console.log(`/${hostObj.city}/${hostObj.owner}`)}
                                             <HostPage key={index} hostProp={hostObj} />
                                         </Route>
                                     )

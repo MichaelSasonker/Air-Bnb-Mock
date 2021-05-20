@@ -1,6 +1,6 @@
 const Host = require('../models/host.model');
 const Action = require('../models/action.model');
-const Renter = requier('../models/renter.model');
+// const Renter = requier('../models/renter.model');
 // const isValidRenterEmail = require('../utils/isValidRenterEmail');
 const isValidDatesRange = require('../utils/isValidDatesRange');
 
