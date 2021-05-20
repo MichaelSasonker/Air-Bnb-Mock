@@ -1,5 +1,6 @@
 const Host = require('../models/host.model');
 const Action = require('../models/action.model');
+const Renter = requier('../models/renter.model');
 // const isValidRenterEmail = require('../utils/isValidRenterEmail');
 const isValidDatesRange = require('../utils/isValidDatesRange');
 
@@ -72,8 +73,6 @@ const addAction = async (req, res) => {
 
     const host = await Host.findOne({ email: req.body.hostEmail });
     const renter = await Renter.findOne({ email: req.body.renterEmail });
-    // const isValidRenter = await isValidRenterEmail(req.user.email);
-    //only renter can add action! (in React)
 
     try {
         if (renter && host) {
