@@ -60,3 +60,7 @@ li, a, ul {
     color: #000;
 }
 
+.main-cont-section {
+    padding: 10vh 0;
+    height: max-content;
+}

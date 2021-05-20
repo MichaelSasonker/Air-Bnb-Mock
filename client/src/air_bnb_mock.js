@@ -1,14 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
+import Axios from 'axios';
 import MainPage from './pages/mainPage/mainPage';
 import SignUpPage from './pages/signUpPage/signUpPage';
 import SignUpAsHostPage from './pages/signUpAsHostPage/signUpAsHostPage';
 import LogInPage from './pages/logInPage/logInPage';
 import HeaderComp from './components/header/header.component';
 import HostPage from './pages/hostPage/hostPage';
-import Page404 from './pages/page404/page404';
-import Axios from 'axios';
+import FooterComp from './components/footer/footer.component';
 import getData from './utils/get_data_function';
+import Page404 from './pages/page404/page404';
+
 import './air_bnb_mock.css';
 
 const logOutURLLocal = 'http://localhost:3000/api/airBnb/users/logoutUser';
@@ -81,15 +83,28 @@ const AirBnbMock = () => {
                         </Route>
                         {   
                             oneHostData.length > 0 
-                            ? <Route path={`/${oneHostData[0].owner}}`} exact> 
+                            ? <Route path={`/${oneHostData[0].city}/${oneHostData[0].owner}}`} exact> 
                                     {spinner ? <div className="loader">Loading...</div> 
                                     : <HostPage hostProp={oneHostData[0]} />} 
                                 </Route>
                             : <div></div> 
                         }
-                        {/* <Route path="*" component={Page404} /> */}
-                    {/* </Switch> */}
+                        {
+                            hostsData.length > 0 &&
+                            hostsData.map((hostObj, index) => {
+                                return (
+                                    <Route key={index} path={`/${hostObj.city}/${hostObj.owner}`} exact>
+                                        {console.log(`/${hostObj.city}/${hostObj.owner}`)}
+                                        <HostPage key={index} hostProp={hostObj} />
+                                    </Route>
+                                )
+                            })
+                        }
+
+                        {/* <Route path="*" component={Page404} /> 
+                    </Switch> */}
                 </div>
+                <FooterComp />
             </BrowserRouter>
         </React.Fragment>
     );

@@ -27,7 +27,7 @@ const CarouselComp = ({ hostsData, isClicked }) => {
                                     <div className="carousel-left" onClick={() => {currHostCard > 0 && setCurrHostCard(currHostCard - 1)}}>
                                         <i className="fas fa-chevron-left fa-lg"></i>
                                     </div>
-                                    <Link to={`/${obj.owner}}`}>
+                                    <Link to={`/${obj.city}/${obj.owner}`}>
                                         <HostCard hostData={obj} key={index} sendData={handleClicked} /> 
                                     </Link>
                                     <div className="carousel-right" onClick={() => {currHostCard < hostsData.length - 1 && setCurrHostCard(currHostCard + 1)}}>

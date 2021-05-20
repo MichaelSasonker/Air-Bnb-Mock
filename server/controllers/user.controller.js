@@ -32,6 +32,21 @@ const getUserByEmail = async (req, res) => {
     }
 }
 
+const getUserNameByEmail = async (req, res) => {
+    const email = req.params.email;
+
+    try {
+        const result = await User.findOne({ email });
+        if (!result) {
+            return res.status(404).send('No such email address!');
+        }
+
+        return res.status(200).send({ firstName: result.firstName, lastName: result.lastName });
+    } catch (err) {
+        return res.status(400).send(err);
+    }
+}
+
 //user
 const addUser = async (req, res) => {
     const newUser = req.body;
@@ -149,6 +164,7 @@ module.exports = {
     getUsers,
     getUserDetails,
     getUserByEmail,
+    getUserNameByEmail,
     addUser,
     loginUser,
     logoutUser,

@@ -1,0 +1,70 @@
+.rent-form-cont {
+    height: 67vh;
+    width: 24vw;
+    border: 1px solid #e0e0e0;
+    border-radius: 2rem;
+    padding: 10px;
+    line-height: 32px;
+    background: #fff;
+    font-family: 'airBnbBook';
+    margin-left: -5rem;
+}
+
+.rent-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+}
+
+h1 {
+    height: fit-content;
+    margin: 10px 0;
+    font-family: 'airBnbBlack';
+    font-size: 2.5rem;
+}
+
+.rent-form-inputs {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    margin-left: 20px;
+    padding: 5px;
+    color: red;
+}
+
+.rent-form-label {
+    padding: 5px 0;
+    font-size: 1.5rem;
+    color: #000;
+}
+
+.rent-form-input {
+    border-bottom: 1px solid #e0e0e0;
+    width: 19vw;
+    height: 2.2rem;
+    padding: 5px;
+    font-family: 'airBnbMed';
+    font-size: 0.9rem;
+}
+
+input:focus {
+    outline: none;
+}
+
+.rent-form-btn {
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 10px ;
+    height: 2.5rem;
+    width: 320px;
+    font-size: 18px;
+    padding: 5px;
+    background: linear-gradient(to right, #c94b4b, #4b134f);
+}
+
+.rent-form-btn:hover {
+    background: linear-gradient(to right ,#4b134f,#c94b4b);
+}
