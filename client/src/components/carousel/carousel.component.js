@@ -8,9 +8,11 @@ import './carousel.component.css';
 const CarouselComp = ({ hostsData, isClicked }) => {
 
     const [currHostCard, setCurrHostCard] = React.useState(0);
-    console.log(hostsData.owner);
-    const handleClicked = (dataObj) => {
-        isClicked(dataObj);
+
+    const handleClicked = (hostDataObj) => {
+        // isClicked(dataObj);
+        // console.log(hostDataObj.owner)
+        isClicked(hostDataObj)
     }
 
     return (
@@ -25,8 +27,8 @@ const CarouselComp = ({ hostsData, isClicked }) => {
                                     <div className="carousel-left" onClick={() => {currHostCard > 0 && setCurrHostCard(currHostCard - 1)}}>
                                         <i className="fas fa-chevron-left fa-lg"></i>
                                     </div>
-                                    <Link to={`/myHosts/${hostsData._id}}`}>
-                                        <HostCard hostData={obj} key={index} /> {/*objClicked={handleClicked}*/}
+                                    <Link to={`/${obj.owner}}`}>
+                                        <HostCard hostData={obj} key={index} sendData={handleClicked} /> 
                                     </Link>
                                     <div className="carousel-right" onClick={() => {currHostCard < hostsData.length - 1 && setCurrHostCard(currHostCard + 1)}}>
                                         <i className="fas fa-chevron-right fa-lg"></i>

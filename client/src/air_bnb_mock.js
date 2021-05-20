@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import MainPage from './pages/mainPage/mainPage';
 import SignUpPage from './pages/signUpPage/signUpPage';
 import SignUpAsHostPage from './pages/signUpAsHostPage/signUpAsHostPage';
 import LogInPage from './pages/logInPage/logInPage';
 import HeaderComp from './components/header/header.component';
+import HostPage from './pages/hostPage/hostPage';
 import Page404 from './pages/page404/page404';
 import Axios from 'axios';
 import getData from './utils/get_data_function';
@@ -15,8 +16,11 @@ const getAllHostsURLLocal = 'http://localhost:8000/api/airBnb/hosts/getAllHosts'
 
 const AirBnbMock = () => {
 
+    const history = useHistory();
+
     const [token, setToken] = React.useState(localStorage.getItem('token'));
-    const [hostData, setHostData] = React.useState([]);
+    const [hostsData, setHostsData] = React.useState([]);
+    const [oneHostData, setOneHostData] = React.useState([]);
     const [spinner, setSpinner] = React.useState(true);
 
     React.useEffect(() => {
@@ -30,7 +34,7 @@ const AirBnbMock = () => {
                 if (respone) {
                     setSpinner(false);
                 }
-                setHostData(respone);
+                setHostsData(respone);
             } catch (err) {
                 console.log(err);
             }
@@ -47,33 +51,45 @@ const AirBnbMock = () => {
         } catch (err) {
             console.log(err.response.data);
         }
+    }
 
+    const getHostData = (hostData) => {
+        console.log(hostData)
+        setOneHostData(hostData);
     }
 
     return (
         <React.Fragment>
             <BrowserRouter>
                 <HeaderComp tokenProp={token} logOutProp={handleLogOut} />
-                <Switch>
-                    <Route path='/' exact>
-                        {
-                            spinner ? <div className="loader">Loading...</div> 
-                            : <MainPage hostsData={hostData} />
+                <div className='main-cont-section'>
+                    {/* <Switch> */}
+                        <Route path='/' exact>
+                            {
+                                spinner ? <div className="loader">Loading...</div> 
+                                : <MainPage hostsData={hostsData} hostDataFunc={getHostData}/>
+                            }
+                        </Route>
+                        <Route path='/signUpPage' exact>
+                            <SignUpPage />
+                        </Route>
+                        <Route path='/logInPage' exact>
+                            <LogInPage />
+                        </Route>
+                        <Route path='/signUpAsHostPage' exact>
+                            <SignUpAsHostPage />
+                        </Route>
+                        {   
+                            oneHostData.length > 0 
+                            ? <Route path={`/${oneHostData[0].owner}}`} exact> 
+                                    {spinner ? <div className="loader">Loading...</div> 
+                                    : <HostPage hostProp={oneHostData[0]} />} 
+                                </Route>
+                            : <div></div> 
                         }
-                    </Route>
-                    <Route path='/signUpPage' exact>
-                        <SignUpPage />
-                    </Route>
-                    <Route path='/logInPage' exact>
-                        <LogInPage />
-                    </Route>
-                    <Route path='/signUpAsHostPage' exact>
-                        <SignUpAsHostPage />
-                    </Route>
-                    <Route path="*">
-                        <Page404 />
-                    </Route>
-                </Switch>
+                        {/* <Route path="*" component={Page404} /> */}
+                    {/* </Switch> */}
+                </div>
             </BrowserRouter>
         </React.Fragment>
     );

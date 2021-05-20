@@ -1,7 +1,7 @@
 // import React from 'react';
 import './hostCard.component.css';
 
-const HostCardComp = ({ hostData }) => {
+const HostCardComp = ({ hostData, sendData }) => {
 
     const arrayBufferToBase64 = (buffer) => {
         let binary = '';
@@ -10,8 +10,12 @@ const HostCardComp = ({ hostData }) => {
         return window.btoa(binary);
     }
 
+    const handleClick = (e) => {
+        sendData(hostData);
+    }
+
     return (
-        <div className='host-card-cont'>
+        <div className='host-card-cont' onClick={(e) => handleClick(e)}>
             <img 
                 className='host-img' 
                 src={`data:image/jpeg;base64,${arrayBufferToBase64(hostData.image.data)}`} 

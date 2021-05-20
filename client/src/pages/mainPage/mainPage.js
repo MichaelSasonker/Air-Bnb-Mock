@@ -6,7 +6,13 @@ import CarouselComp from '../../components/carousel/carousel.component';
 import './mainPage.css';
 
 
-const MainPage = ({ hostsData }) => {
+
+const MainPage = ({ hostsData, hostDataFunc }) => {
+
+    const handleHostClicked = (hostData) => {
+        console.log(hostData);
+        hostDataFunc(hostData);
+    }
 
     return (
         <div className='main-page-cont'>
@@ -30,7 +36,7 @@ const MainPage = ({ hostsData }) => {
                         : ''
                     }
                 </div> */}
-                <CarouselComp hostsData={hostsData} />
+                <CarouselComp hostsData={hostsData} isClicked={handleHostClicked}/>
             </div>
         </div>
     );
