@@ -5,10 +5,10 @@ const validateRentHomeForm = (values) => {
     let phoneReg = /^\(?([0-9]{3})\)?([0-9]{3})([0-9]{4})$/;
     let errors = {};
     
-    if (!values.renterEmail) {
-        errors.email = 'Email required';
-    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-        errors.email = 'Email address is invalid';
+    if (!values.renterEmail.trim()) {
+        errors.renterEmail = 'Email required';
+    } else if (!/\S+@\S+\.\S+/.test(values.renterEmail)) {
+        errors.renterEmail = 'Email address is invalid';
     } 
 
     if (!values.phoneNumber.match(phoneReg)) {
@@ -19,7 +19,7 @@ const validateRentHomeForm = (values) => {
     
     if (!values.creditCard.trim()) {
         errors.creditCard = 'Credit card is required';
-    } else if (!values.creditCard.length !== 16) {
+    } else if (values.creditCard.length !== 16) {
         errors.creditCard = 'Invalid credit card';
     }
 

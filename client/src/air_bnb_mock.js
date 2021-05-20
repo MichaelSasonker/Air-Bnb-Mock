@@ -56,55 +56,60 @@ const AirBnbMock = () => {
     }
 
     const getHostData = (hostData) => {
-        console.log(hostData)
         setOneHostData(hostData);
     }
 
     return (
         <React.Fragment>
             <BrowserRouter>
-                <HeaderComp tokenProp={token} logOutProp={handleLogOut} />
-                <div className='main-cont-section'>
-                    {/* <Switch> */}
-                        <Route path='/' exact>
-                            {
-                                spinner ? <div className="loader">Loading...</div> 
-                                : <MainPage hostsData={hostsData} hostDataFunc={getHostData}/>
-                            }
-                        </Route>
-                        <Route path='/signUpPage' exact>
-                            <SignUpPage />
-                        </Route>
-                        <Route path='/logInPage' exact>
-                            <LogInPage />
-                        </Route>
-                        <Route path='/signUpAsHostPage' exact>
-                            <SignUpAsHostPage />
-                        </Route>
-                        {   
-                            oneHostData.length > 0 
-                            ? <Route path={`/${oneHostData[0].city}/${oneHostData[0].owner}}`} exact> 
-                                    {spinner ? <div className="loader">Loading...</div> 
-                                    : <HostPage hostProp={oneHostData[0]} />} 
-                                </Route>
-                            : <div></div> 
-                        }
-                        {
-                            hostsData.length > 0 &&
-                            hostsData.map((hostObj, index) => {
-                                return (
-                                    <Route key={index} path={`/${hostObj.city}/${hostObj.owner}`} exact>
-                                        {console.log(`/${hostObj.city}/${hostObj.owner}`)}
-                                        <HostPage key={index} hostProp={hostObj} />
+                {
+                    spinner ? <div className="loader">Loading...</div>
+                    : (
+                    <>
+                        <HeaderComp tokenProp={token} logOutProp={handleLogOut} />
+                        <div className='main-cont-section'>
+                            <Route path='/' exact>
+                                {
+                                    spinner ? <div className="loader">Loading...</div> 
+                                    : <MainPage hostsData={hostsData} hostDataFunc={getHostData}/>
+                                }
+                            </Route>
+                            <Route path='/signUpPage' exact>
+                                <SignUpPage />
+                            </Route>
+                            <Route path='/logInPage' exact>
+                                <LogInPage />
+                            </Route>
+                            <Route path='/signUpAsHostPage' exact>
+                                <SignUpAsHostPage />
+                            </Route>
+                            {   
+                                oneHostData.length > 0 
+                                ? <Route path={`/${oneHostData[0].city}/${oneHostData[0].owner}}`} exact> 
+                                        {spinner ? <div className="loader">Loading...</div> 
+                                        : <HostPage hostProp={oneHostData[0]} />} 
                                     </Route>
-                                )
-                            })
-                        }
+                                : <div></div> 
+                            }
+                            {
+                                hostsData.length > 0 &&
+                                hostsData.map((hostObj, index) => {
+                                    return (
+                                        <Route key={index} path={`/${hostObj.city}/${hostObj.owner}`} exact>
+                                            {console.log(`/${hostObj.city}/${hostObj.owner}`)}
+                                            <HostPage key={index} hostProp={hostObj} />
+                                        </Route>
+                                    )
+                                })
+                            }
 
-                        {/* <Route path="*" component={Page404} /> 
-                    </Switch> */}
-                </div>
-                <FooterComp />
+                            {/* <Route path="*" component={Page404} /> 
+                                </Switch> */}
+                        </div>
+                        <FooterComp />
+                    </>
+                )
+            }
             </BrowserRouter>
         </React.Fragment>
     );

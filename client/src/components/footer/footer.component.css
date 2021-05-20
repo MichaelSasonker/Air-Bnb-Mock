@@ -1,0 +1,23 @@
+.footer-cont {
+    height: 10vh;
+    width: 100%;
+    background: #efefef;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.links a {
+    margin-right: 1rem;
+}
+
+.links .git {
+    color: #24292e;
+}
+
+.links .linkedin {
+    color: #0366d6;
+}

@@ -1,4 +1,3 @@
-// import React from 'react';
 import './hostCard.component.css';
 
 const HostCardComp = ({ hostData, sendData }) => {

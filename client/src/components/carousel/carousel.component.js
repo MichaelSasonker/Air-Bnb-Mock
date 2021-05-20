@@ -10,8 +10,6 @@ const CarouselComp = ({ hostsData, isClicked }) => {
     const [currHostCard, setCurrHostCard] = React.useState(0);
 
     const handleClicked = (hostDataObj) => {
-        // isClicked(dataObj);
-        // console.log(hostDataObj.owner)
         isClicked(hostDataObj)
     }
 
@@ -37,7 +35,7 @@ const CarouselComp = ({ hostsData, isClicked }) => {
                             </React.Fragment>
                         );
                     }
-                  })
+                })
                 : ''
             }
         </div>

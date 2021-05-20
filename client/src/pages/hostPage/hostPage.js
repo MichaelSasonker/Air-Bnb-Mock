@@ -36,6 +36,7 @@ const HostPage = ({ hostProp }) => {
     }
 
     const submitForm = async (values) => {
+        //check if renter already exists!!!
         try {
             // const newHost = await createHost(formData, token, localHostBackAddHostURL);
             const newRenter = await Axios({
@@ -48,6 +49,7 @@ const HostPage = ({ hostProp }) => {
                     creditCard: values.creditCard 
                 }
             });
+            console.log(newRenter);
 
             if (newRenter.error) {
                 setServerError(true);
@@ -64,6 +66,7 @@ const HostPage = ({ hostProp }) => {
                         guestsNumber: values.guestsNumber 
                     }
                 });
+
                 if (newAction.error) {
                     setServerError(true);
                 } else {
@@ -75,7 +78,7 @@ const HostPage = ({ hostProp }) => {
             }
 
         } catch (err) {
-            console.log({ error: err.response.data });
+            console.log(err);
         }
     }
 
@@ -90,8 +93,8 @@ const HostPage = ({ hostProp }) => {
             getHostName(hostProp.email);
         }
     }, []);
-    console.log(hostProp)
-    console.log(hostNameObj);
+    // console.log(hostProp)
+    // console.log(hostNameObj);
 
     return (
         <div className='host-page-cont'>

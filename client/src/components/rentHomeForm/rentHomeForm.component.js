@@ -18,7 +18,6 @@ const RentHomeForm = ({ submitForm, isError, hostEmailProp }) => {
     // const [serverError, setServerError] = React.useState(false)
 
     const handleChange = (e) => {
-        console.log(e.target.value)
         setValues({
             ...values,
             [e.target.name]: e.target.value
@@ -26,12 +25,11 @@ const RentHomeForm = ({ submitForm, isError, hostEmailProp }) => {
     };
   
     const handleSubmit = (e) => {
-      e.preventDefault();
-
-      setErrors(validateRentHomeForm(values));
-      setIsSubmitting(true);
+        e.preventDefault();
+        setErrors(validateRentHomeForm(values));
+        setIsSubmitting(true);
     };
-  
+    
     React.useEffect(
         () => {
             if (Object.keys(errors).length === 0 && isSubmitting) {
@@ -46,14 +44,14 @@ const RentHomeForm = ({ submitForm, isError, hostEmailProp }) => {
                     Rent this apartment
                 </h1>
                 <div className='rent-form-inputs'>
-                    <label className='rent-form-label' htmlFor='email'>Email:</label>
+                    <label className='rent-form-label' htmlFor='renterEmail'>Email:</label>
                     <input
                         className='rent-form-input'
-                        id='email'
+                        id='renterEmail'
                         type='email'
-                        name='email'
+                        name='renterEmail'
                         placeholder='Enter your email'
-                        value={values.email}
+                        value={values.renterEmail}
                         onChange={(e) => handleChange(e)}
                     />
                     {errors.email && <p>{errors.email}</p>}
@@ -79,10 +77,23 @@ const RentHomeForm = ({ submitForm, isError, hostEmailProp }) => {
                         type='text'
                         name='creditCard'
                         placeholder='Enter your credit card'
-                        value={values.phoneNumber}
+                        value={values.creditCard}
                         onChange={(e) => handleChange(e)}
                     />
                     {errors.creditCard && <p>{errors.creditCard}</p>}
+                </div>
+                <div className='rent-form-inputs'>
+                    <label className='rent-form-label' htmlFor='guestsNumber'>Guests:</label>
+                    <input
+                        className='rent-form-input'
+                        id='guestsNumber'
+                        type='number'
+                        name='guestsNumber'
+                        placeholder='Guests number'
+                        value={values.guestsNumber}
+                        onChange={(e) => handleChange(e)}
+                    />
+                    {errors.guestsNumber && <p>{errors.guestsNumber}</p>}
                 </div>
                 <div className='rent-form-inputs'>
                     <label className='rent-form-label' htmlFor='fromDate'>Check-In:</label>

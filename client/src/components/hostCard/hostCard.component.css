@@ -21,6 +21,8 @@
     justify-content: space-between;
     align-items: left;
     height: 85%;
+    width: 15vw;
+    padding-right: 10px;
     border-right: 1px solid #d0d0d0;
 }
 
